@@ -47,11 +47,28 @@ body {
 }
 
 @layer components {
-  .btnPrimary {
-    @apply px-4 py-2 rounded-lg bg-background dark:bg-foreground text-foreground dark:text-background cursor-pointer;
+  .btn-brand-primary {
+    @apply bg-primary hover:bg-primary/90 text-white px-[26px] py-3.5 rounded-xl font-semibold shadow-sm transition-colors cursor-pointer border-none inline-flex items-center justify-center text-center;
   }
 
-  .btnSecondary {
-    @apply px-4 py-2 rounded-lg bg-primary text-background cursor-pointer;
+  .btn-brand-secondary {
+    @apply bg-card hover:bg-background text-foreground border border-muted/20 px-[26px] py-3.5 rounded-xl font-semibold transition-colors cursor-pointer inline-flex items-center justify-center text-center;
+  }
+
+  .btn-brand-dark {
+    @apply bg-white/10 hover:bg-white/20 text-white border border-white/20 px-[26px] py-3.5 rounded-xl font-semibold transition-colors cursor-pointer inline-flex items-center justify-center text-center;
+  }
+
+  .btn-brand-header-primary {
+    @apply bg-primary hover:bg-primary/90 text-white border-none cursor-pointer px-[18px] py-[9px] rounded-[9px] text-[15px] font-semibold transition-colors shadow-sm inline-flex items-center justify-center text-center;
+  }
+
+  .btn-brand-header-secondary {
+    @apply bg-transparent border-none cursor-pointer text-foreground text-[15px] font-semibold hover:text-primary transition-colors py-2 px-3 inline-flex items-center justify-center text-center;
+  }
+
+  .nav-link {
+    @apply text-secondary hover:text-foreground transition-colors text-[15px] font-medium;
   }
 }
+

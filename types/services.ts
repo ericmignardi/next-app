@@ -1,7 +1,8 @@
-import { LucideIcon } from "lucide-react";
+import React from "react";
 
 export type ServiceCardType = {
-  logo: LucideIcon;
+  logo: React.ComponentType;
   title: string;
   description: string;
+  iconBg: string;
 };

@@ -1,79 +1,86 @@
 import { ServiceCardType } from "@/types/services";
-import { BarChart, Circle, Diamond, Square, Triangle } from "lucide-react";
+import React from "react";
 import ServicesCard from "./ServicesCard";
 
 const serviceCards: ServiceCardType[] = [
   {
-    logo: Circle,
+    logo: () => <div className="w-4 h-4 rounded-full border-[3px] border-primary"></div>,
     title: "Lightning fast",
     description:
-      "Every interaction lands in under 50ms. No spinners, no waiting - it just feels instant.",
+      "Every interaction lands in under 50ms. No spinners, no waiting — it just feels instant.",
+    iconBg: "bg-primary/10",
   },
   {
-    logo: Diamond,
+    logo: () => <div className="w-[15px] h-[15px] bg-primary rotate-45 rounded-[3px]"></div>,
     title: "Real-time sync",
     description:
       "See changes the moment teammates make them. Cursors, comments, and edits, live.",
+    iconBg: "bg-primary/10",
   },
   {
-    logo: Square,
+    logo: () => <div className="w-4 h-4 rounded-[4px] bg-primary"></div>,
     title: "Granular controls",
     description:
       "Role-based permissions down to the field. Give people exactly the access they need.",
+    iconBg: "bg-primary/10",
   },
   {
-    logo: Triangle,
+    logo: () => (
+      <div className="w-0 h-0 border-l-[9px] border-l-transparent border-r-[9px] border-r-transparent border-b-[15px] border-b-accent"></div>
+    ),
     title: "Automations",
     description:
       "Trigger workflows on any event. Ship repetitive work to the background and move on.",
+    iconBg: "bg-accent/10",
   },
   {
-    logo: BarChart,
+    logo: () => (
+      <div className="flex gap-[3px]">
+        <span className="w-[4px] h-4 bg-accent rounded-[2px]"></span>
+        <span className="w-[4px] h-[11px] bg-accent rounded-[2px] self-end"></span>
+        <span className="w-[4px] h-4 bg-accent rounded-[2px]"></span>
+      </div>
+    ),
     title: "Insightful analytics",
     description:
       "Dashboards that answer the question before you ask it. Track what actually moves.",
+    iconBg: "bg-accent/10",
   },
   {
-    logo: Circle,
+    logo: () => (
+      <div className="w-4 h-4 rounded-full bg-primary relative">
+        <span className="absolute inset-[5px] bg-primary/10 rounded-full"></span>
+      </div>
+    ),
     title: "Enterprise security",
     description:
       "SOC 2 Type II, SSO, and audit logs out of the box. Built to pass the scariest reviews.",
+    iconBg: "bg-primary/10",
   },
 ];
 
 export default function Services() {
   return (
-    <section>
-      <div className="max-w-6xl mx-auto p-8 flex flex-col gap-12">
-        {/* Header */}
-        <div className="flex flex-col gap-8 items-center text-center">
-          {/* Span */}
-          <span className="text-primary font-semibold">
-            Everything in one place
-          </span>
+    <section id="features" className="max-w-[1200px] mx-auto px-8 py-8 pb-10">
+      {/* Header */}
+      <div className="text-center max-w-[640px] mx-auto mb-14">
+        <span className="text-[14px] font-semibold text-primary">
+          Everything in one place
+        </span>
+        <h2 className="text-[36px] sm:text-[42px] font-extrabold tracking-[-0.025em] text-foreground mt-3.5 mb-0">
+          Built for the way teams really work
+        </h2>
+        <p className="text-lg text-muted mt-4 leading-[1.55]">
+          Powerful primitives that stay out of your way. No clutter, no
+          learning curve — just momentum.
+        </p>
+      </div>
 
-          {/* Title */}
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-5xl font-black leading-[1.05]">
-              Built for the way teams really work
-            </h2>
-          </div>
-
-          {/* Description */}
-          <div className="max-w-2xl mx-auto">
-            <p className="text-lg text-muted leading-[1.55]">
-              Powerful primitives that stay out of your way. No clutter, no
-              learning curve - just momentum.
-            </p>
-          </div>
-        </div>
-
-        {/* Grid */}
-        <div className="grid grid-cols-3 gap-4">
-          {serviceCards.map((service) => (
-            <ServicesCard key={service.title} service={service} />
-          ))}
-        </div>
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {serviceCards.map((service) => (
+          <ServicesCard key={service.title} service={service} />
+        ))}
       </div>
     </section>
   );

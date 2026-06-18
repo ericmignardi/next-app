@@ -2,38 +2,43 @@ import React from "react";
 
 export default function Statistics() {
   return (
-    <section>
-      <div className="max-w-6xl mx-auto rounded-2xl bg-primary grid grid-cols-4 gap-8 items-center py-14 px-10">
+    <section className="max-w-[1200px] mx-auto my-12 px-8">
+      <div 
+        className="bg-primary rounded-[20px] py-14 px-10 grid grid-cols-2 md:grid-cols-4 gap-8 relative overflow-hidden"
+        style={{
+          backgroundImage: "radial-gradient(circle at 85% 15%, rgba(255,255,255,0.12), transparent 45%)"
+        }}
+      >
         {/* Stat 1 */}
-        <div className="flex flex-col gap-4 text-center">
-          <h4 className="text-5xl font-black text-background dark:text-foreground">
+        <div className="flex flex-col items-center text-center">
+          <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
             12k+
           </h4>
-          <p className="text-muted">Teams onboarded</p>
+          <p className="text-[15px] text-white/80 mt-1.5 font-medium">Teams onboarded</p>
         </div>
 
         {/* Stat 2 */}
-        <div className="flex flex-col gap-4 text-center">
-          <h4 className="text-5xl font-black text-background dark:text-foreground">
+        <div className="flex flex-col items-center text-center">
+          <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
             99.99%
           </h4>
-          <p className="text-muted">Uptime SLA</p>
+          <p className="text-[15px] text-white/80 mt-1.5 font-medium">Uptime SLA</p>
         </div>
 
         {/* Stat 3 */}
-        <div className="flex flex-col gap-4 text-center">
-          <h4 className="text-5xl font-black text-background dark:text-foreground">
+        <div className="flex flex-col items-center text-center">
+          <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
             48ms
           </h4>
-          <p className="text-muted">Median response</p>
+          <p className="text-[15px] text-white/80 mt-1.5 font-medium">Median response</p>
         </div>
 
         {/* Stat 4 */}
-        <div className="flex flex-col gap-4 text-center">
-          <h4 className="text-5xl font-black text-background dark:text-foreground">
+        <div className="flex flex-col items-center text-center">
+          <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
             4.9/5
           </h4>
-          <p className="text-muted">Average rating</p>
+          <p className="text-[15px] text-white/80 mt-1.5 font-medium">Average rating</p>
         </div>
       </div>
     </section>

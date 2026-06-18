@@ -1,65 +1,87 @@
 import Link from "next/link";
-import Image from "next/image";
-import logo from "@/public/logo.svg";
+import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="bg-background dark:bg-foreground text-foreground dark:text-background border-t border-muted/25">
-      <div className="max-w-6xl mx-auto flex flex-col gap-12 pt-12 pb-4 px4">
-        {/* Grid */}
-        <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr] gap-10">
-          {/* Column 1 */}
-          <div className="flex flex-col gap-4 items-start">
-            <Image
-              src={logo}
-              alt="next-app logo"
-              height={12}
-              width={12}
-              className="h-6 w-auto object-contain"
-            />
-
-            <p className="text-sm text-muted max-w-60">
-              The fast, beautiful workspace for teams who ship.
-            </p>
+    <footer className="border-t border-muted/20 bg-card text-foreground">
+      <div className="max-w-[1200px] mx-auto px-8 py-14 grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1fr] gap-10">
+        {/* Column 1 */}
+        <div className="flex flex-col items-start">
+          <div className="flex items-center gap-[10px] select-none mb-3.5">
+            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
+              <div className="w-[12px] h-[12px] bg-white rotate-45 rounded-[2px]"></div>
+            </div>
+            <span className="font-bold text-lg text-foreground">Lumen</span>
           </div>
 
-          {/* Column 2 */}
-          <div className="flex flex-col gap-4 items-start text-sm">
-            <p className="font-semibold">Product</p>
-            <div className="flex flex-col gap-2 text-muted">
-              <Link href={"#features"}>Features</Link>
-              <Link href={"#pricing"}>Pricing</Link>
-              <Link href={"#integrations"}>Integrations</Link>
-              <Link href={"#changelog"}>Changelog</Link>
-            </div>
-          </div>
+          <p className="text-[14px] text-muted max-w-[240px] leading-[1.55] m-0">
+            The fast, beautiful workspace for teams who ship.
+          </p>
+        </div>
 
-          {/* Column 3 */}
-          <div className="flex flex-col gap-4 items-start text-sm">
-            <p className="font-semibold">Company</p>
-            <div className="flex flex-col gap-2 text-muted">
-              <Link href={"#about"}>About</Link>
-              <Link href={"#blog"}>Blog</Link>
-              <Link href={"#careers"}>Careers</Link>
-              <Link href={"#contact"}>Contact</Link>
-            </div>
-          </div>
-
-          {/* Column 4 */}
-          <div className="flex flex-col gap-4 items-start text-sm">
-            <p className="font-semibold">Legal</p>
-            <div className="flex flex-col gap-2 text-muted">
-              <Link href={"#privacy"}>Privacy</Link>
-              <Link href={"#terms"}>Terms</Link>
-              <Link href={"#security"}>Security</Link>
-            </div>
+        {/* Column 2 */}
+        <div className="flex flex-col items-start">
+          <h5 className="text-[13px] font-semibold text-foreground mb-3.5">Product</h5>
+          <div className="flex flex-col gap-2.5 text-[14px] text-muted">
+            <Link href="#features" className="hover:text-foreground transition-colors duration-150">
+              Features
+            </Link>
+            <Link href="#pricing" className="hover:text-foreground transition-colors duration-150">
+              Pricing
+            </Link>
+            <Link href="#integrations" className="hover:text-foreground transition-colors duration-150">
+              Integrations
+            </Link>
+            <Link href="#changelog" className="hover:text-foreground transition-colors duration-150">
+              Changelog
+            </Link>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div>
-          <span className="text-sm text-muted">
-            &copy; {new Date().getFullYear()} next-app inc. All rights reserved.
+        {/* Column 3 */}
+        <div className="flex flex-col items-start">
+          <h5 className="text-[13px] font-semibold text-foreground mb-3.5">Company</h5>
+          <div className="flex flex-col gap-2.5 text-[14px] text-muted">
+            <Link href="#about" className="hover:text-foreground transition-colors duration-150">
+              About
+            </Link>
+            <Link href="#blog" className="hover:text-foreground transition-colors duration-150">
+              Blog
+            </Link>
+            <Link href="#careers" className="hover:text-foreground transition-colors duration-150">
+              Careers
+            </Link>
+            <Link href="#contact" className="hover:text-foreground transition-colors duration-150">
+              Contact
+            </Link>
+          </div>
+        </div>
+
+        {/* Column 4 */}
+        <div className="flex flex-col items-start">
+          <h5 className="text-[13px] font-semibold text-foreground mb-3.5">Legal</h5>
+          <div className="flex flex-col gap-2.5 text-[14px] text-muted">
+            <Link href="#privacy" className="hover:text-foreground transition-colors duration-150">
+              Privacy
+            </Link>
+            <Link href="#terms" className="hover:text-foreground transition-colors duration-150">
+              Terms
+            </Link>
+            <Link href="#security" className="hover:text-foreground transition-colors duration-150">
+              Security
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-muted/10 bg-card">
+        <div className="max-w-[1200px] mx-auto px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <span className="text-[13px] text-muted/80 select-none">
+            © {new Date().getFullYear()} Lumen Inc. All rights reserved.
+          </span>
+          <span className="font-mono text-[12px] text-muted/60 select-none">
+            made with care
           </span>
         </div>
       </div>

@@ -1,61 +1,47 @@
+import { SignUpButton } from "@clerk/nextjs";
+
 export default function Hero() {
   return (
-    <section className="mt-20">
-      <div className="py-24 px-8 max-w-6xl mx-auto flex flex-col items-center gap-8">
-        {/* Span */}
-        <span className="flex items-center gap-2 rounded-full border border-muted/25 p-2 text-sm text-muted">
-          <span className="flex items-center gap-1 bg-accent/25 rounded-full px-2 text-accent">
-            <span className="size-2 rounded-full bg-accent"></span>
-            New
-          </span>
-          Real-time collaboration is here
+    <section className="max-w-[1000px] mx-auto px-8 pt-24 pb-14 text-center flex flex-col items-center">
+      {/* Real-time Collaboration Banner */}
+      <div className="inline-flex items-center gap-2 bg-card border border-muted/20 rounded-full px-3.5 py-1.5 text-[13px] font-medium text-secondary shadow-[0_1px_2px_rgba(15,23,42,0.04)] select-none">
+        <span className="inline-flex items-center gap-1.5 bg-accent/20 text-accent px-2 py-0.5 rounded-full font-semibold text-[12px]">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+          New
         </span>
-
-        {/* Title */}
-        <div className="max-w-4xl mx-auto text-center ">
-          <h1 className="text-6xl font-black leading-[1.05]">
-            The workspace where your team actually gets things done
-          </h1>
-        </div>
-
-        {/* Description */}
-        <div className="max-w-2xl mx-auto text-center">
-          <p className="text-xl text-muted leading-[1.55]">
-            next-app brings your projects, docs, and data into one fast,
-            beautiful surface - so your team can focus on the work that matters.
-          </p>
-        </div>
-
-        {/* CTA */}
-        <div className="flex items-center gap-4">
-          <button className="btnSecondary">Start for free</button>
-          <button className="btnPrimary border border-muted/25">
-            Watch demo
-          </button>
-        </div>
-
-        {/* Span 2 */}
-        <p className="text-sm text-muted">
-          No credit card required · Free 14-day trial{" "}
-        </p>
-
-        <div className="flex flex-col items-center gap-8 text-center mt-24">
-          <p className="text-muted uppercase font-medium text-sm">
-            Trusted By Fast-Moving Teams
-          </p>
-          <div className="flex items-center gap-8 font-mono text-muted text-lg">
-            <p>acme</p>
-
-            <p>globex</p>
-
-            <p>hooli</p>
-
-            <p>initech</p>
-
-            <p>umbra</p>
-          </div>
-        </div>
+        Real-time collaboration is here
       </div>
+
+      {/* Title */}
+      <h1 className="text-[40px] sm:text-[56px] md:text-[64px] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground mt-7 max-w-[820px] mx-auto">
+        The workspace where your team<br className="hidden sm:inline" />actually gets things done
+      </h1>
+
+      {/* Description */}
+      <p className="text-[17px] sm:text-xl leading-[1.55] text-muted mt-6 max-w-[600px] mx-auto">
+        Lumen brings your projects, docs, and data into one fast, beautiful surface — so your team can focus on the work that matters.
+      </p>
+
+      {/* CTA Buttons */}
+      <div className="flex flex-col sm:flex-row gap-3.5 justify-center mt-9 w-full sm:w-auto">
+        <SignUpButton>
+          <button className="btn-brand-primary w-full sm:w-auto">
+            Start for free
+          </button>
+        </SignUpButton>
+        <button className="btn-brand-secondary w-full sm:w-auto">
+          <span className="w-[18px] h-[18px] rounded-full bg-foreground inline-flex items-center justify-center">
+            <span className="w-0 h-0 border-l-[6px] border-l-white border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent ml-0.5"></span>
+          </span>
+          Watch demo
+        </button>
+      </div>
+
+      {/* Trial info */}
+      <p className="text-[13px] text-muted/80 mt-[18px]">
+        No credit card required · Free 14-day trial
+      </p>
     </section>
   );
 }
+
