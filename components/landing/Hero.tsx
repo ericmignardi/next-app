@@ -1,4 +1,5 @@
 import { SignUpButton } from "@clerk/nextjs";
+import { Play, PlayCircle } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -14,12 +15,15 @@ export default function Hero() {
 
       {/* Title */}
       <h1 className="text-[40px] sm:text-[56px] md:text-[64px] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground mt-7 max-w-[820px] mx-auto">
-        The workspace where your team<br className="hidden sm:inline" />actually gets things done
+        The workspace where your team
+        <br className="hidden sm:inline" />
+        actually gets things done
       </h1>
 
       {/* Description */}
       <p className="text-[17px] sm:text-xl leading-[1.55] text-muted mt-6 max-w-[600px] mx-auto">
-        Lumen brings your projects, docs, and data into one fast, beautiful surface — so your team can focus on the work that matters.
+        Lumen brings your projects, docs, and data into one fast, beautiful
+        surface — so your team can focus on the work that matters.
       </p>
 
       {/* CTA Buttons */}
@@ -29,10 +33,8 @@ export default function Hero() {
             Start for free
           </button>
         </SignUpButton>
-        <button className="btn-brand-secondary w-full sm:w-auto">
-          <span className="w-[18px] h-[18px] rounded-full bg-foreground inline-flex items-center justify-center">
-            <span className="w-0 h-0 border-l-[6px] border-l-white border-t-[4px] border-t-transparent border-b-[4px] border-b-transparent ml-0.5"></span>
-          </span>
+        <button className="btn-brand-secondary w-full sm:w-auto flex items-center gap-2">
+          <PlayCircle className="size-6" />
           Watch demo
         </button>
       </div>
@@ -44,4 +46,3 @@ export default function Hero() {
     </section>
   );
 }
-
