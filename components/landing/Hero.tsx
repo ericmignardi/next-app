@@ -14,7 +14,7 @@ export default function Hero() {
       </div>
 
       {/* Title */}
-      <h1 className="text-[40px] sm:text-[56px] md:text-[64px] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground mt-7 max-w-[820px] mx-auto">
+      <h1 className="text-[40px] sm:text-[56px] md:text-[64px] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground mt-7 max-w-205 mx-auto">
         The workspace where your team
         <br className="hidden sm:inline" />
         actually gets things done
@@ -38,7 +38,7 @@ export default function Hero() {
       </div>
 
       {/* Trial info */}
-      <p className="text-[13px] text-muted/80 mt-[18px]">
+      <p className="text-[13px] text-muted/80 mt-4.5">
         No credit card required · Free 14-day trial
       </p>
     </section>

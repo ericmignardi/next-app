@@ -13,7 +13,7 @@ export default function PricingCard({ card }: { card: PricingCardType }) {
       }`}
     >
       {card.isMostPopular && (
-        <span className="absolute -top-3.25 left-1/2 -translate-x-1/2 bg-primary text-white text-[12px] font-semibold px-3 py-[5px] rounded-full select-none leading-none">
+        <span className="absolute -top-3.25 left-1/2 -translate-x-1/2 bg-primary text-white text-[12px] font-semibold px-3 py-1.25 rounded-full select-none leading-none">
           Most popular
         </span>
       )}

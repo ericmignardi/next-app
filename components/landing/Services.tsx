@@ -29,7 +29,7 @@ const serviceCards: ServiceCardType[] = [
   },
   {
     logo: () => (
-      <div className="w-0 h-0 border-l-[9px] border-l-transparent border-r-[9px] border-r-transparent border-b-[15px] border-b-accent"></div>
+      <div className="w-0 h-0 border-l-[9px] border-l-transparent border-r-[9px] border-r-transparent border-b-15 border-b-accent"></div>
     ),
     title: "Automations",
     description:

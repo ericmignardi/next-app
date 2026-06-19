@@ -10,7 +10,7 @@ export default function Testimonial() {
       </div>
 
       {/* Quote */}
-      <p className="text-[24px] sm:text-[28px] leading-[1.45] font-semibold text-foreground tracking-[-0.02em] mb-7 max-w-[760px]">
+      <p className="text-[24px] sm:text-[28px] leading-[1.45] font-semibold text-foreground tracking-[-0.02em] mb-7 max-w-190">
         &quot;We replaced four tools with Lumen in a week. Our team ships
         faster, the data is finally trustworthy, and onboarding new hires takes
         an afternoon.&quot;
