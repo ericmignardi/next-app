@@ -35,10 +35,10 @@ const pricingCards: PricingCardType[] = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="max-w-[1100px] mx-auto px-8 py-16">
+    <section id="pricing" className="max-w-275 mx-auto px-8 py-16">
       {/* Top */}
-      <div className="text-center max-w-[560px] mx-auto mb-12 flex flex-col items-center">
-        <h3 className="text-[36px] sm:text-[42px] font-extrabold tracking-[-0.025em] text-foreground mb-0">
+      <div className="text-center max-w-140 mx-auto mb-12 flex flex-col items-center">
+        <h3 className="text-[36px] sm:text-[42px] font-extrabold tracking-tight text-foreground mb-0">
           Simple, honest pricing
         </h3>
         <p className="text-lg text-muted mt-4 leading-[1.55]">

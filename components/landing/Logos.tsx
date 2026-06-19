@@ -1,11 +1,11 @@
 export default function Logos() {
   const logos = ["acme", "globex", "hooli", "initech", "umbra"];
   return (
-    <section className="max-w-[1100px] mx-auto px-8 pt-2 pb-18 text-center">
+    <section className="max-w-275 mx-auto px-8 pt-2 pb-18 text-center">
       <p className="text-[13px] font-semibold tracking-[0.08em] uppercase text-muted/80 mb-7 select-none">
         Trusted by fast-moving teams
       </p>
-      <div className="flex flex-wrap items-center justify-center gap-[48px]">
+      <div className="flex flex-wrap items-center justify-center gap-12">
         {logos.map((logo) => (
           <span
             key={logo}

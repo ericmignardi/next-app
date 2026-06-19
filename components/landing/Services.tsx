@@ -1,24 +1,27 @@
 import { ServiceCardType } from "@/types/services";
-import React from "react";
 import ServicesCard from "./ServicesCard";
 
 const serviceCards: ServiceCardType[] = [
   {
-    logo: () => <div className="w-4 h-4 rounded-full border-[3px] border-primary"></div>,
+    logo: () => (
+      <div className="w-4 h-4 rounded-full border-[3px] border-primary"></div>
+    ),
     title: "Lightning fast",
     description:
       "Every interaction lands in under 50ms. No spinners, no waiting — it just feels instant.",
     iconBg: "bg-primary/10",
   },
   {
-    logo: () => <div className="w-[15px] h-[15px] bg-primary rotate-45 rounded-[3px]"></div>,
+    logo: () => (
+      <div className="w-3.75 h-3.75 bg-primary rotate-45 rounded-[3px]"></div>
+    ),
     title: "Real-time sync",
     description:
       "See changes the moment teammates make them. Cursors, comments, and edits, live.",
     iconBg: "bg-primary/10",
   },
   {
-    logo: () => <div className="w-4 h-4 rounded-[4px] bg-primary"></div>,
+    logo: () => <div className="w-4 h-4 rounded-sm bg-primary"></div>,
     title: "Granular controls",
     description:
       "Role-based permissions down to the field. Give people exactly the access they need.",
@@ -35,10 +38,10 @@ const serviceCards: ServiceCardType[] = [
   },
   {
     logo: () => (
-      <div className="flex gap-[3px]">
-        <span className="w-[4px] h-4 bg-accent rounded-[2px]"></span>
-        <span className="w-[4px] h-[11px] bg-accent rounded-[2px] self-end"></span>
-        <span className="w-[4px] h-4 bg-accent rounded-[2px]"></span>
+      <div className="flex gap-0.75">
+        <span className="w-1 h-4 bg-accent rounded-xs"></span>
+        <span className="w-1 h-2.75 bg-accent rounded-xs self-end"></span>
+        <span className="w-1 h-4 bg-accent rounded-xs"></span>
       </div>
     ),
     title: "Insightful analytics",
@@ -49,7 +52,7 @@ const serviceCards: ServiceCardType[] = [
   {
     logo: () => (
       <div className="w-4 h-4 rounded-full bg-primary relative">
-        <span className="absolute inset-[5px] bg-primary/10 rounded-full"></span>
+        <span className="absolute inset-1.25 bg-primary/10 rounded-full"></span>
       </div>
     ),
     title: "Enterprise security",
@@ -61,18 +64,18 @@ const serviceCards: ServiceCardType[] = [
 
 export default function Services() {
   return (
-    <section id="features" className="max-w-[1200px] mx-auto px-8 py-8 pb-10">
+    <section id="features" className="max-w-300 mx-auto px-8 py-8 pb-10">
       {/* Header */}
-      <div className="text-center max-w-[640px] mx-auto mb-14">
+      <div className="text-center max-w-160 mx-auto mb-14">
         <span className="text-[14px] font-semibold text-primary">
           Everything in one place
         </span>
-        <h2 className="text-[36px] sm:text-[42px] font-extrabold tracking-[-0.025em] text-foreground mt-3.5 mb-0">
+        <h2 className="text-[36px] sm:text-[42px] font-extrabold tracking-tight text-foreground mt-3.5 mb-0">
           Built for the way teams really work
         </h2>
         <p className="text-lg text-muted mt-4 leading-[1.55]">
-          Powerful primitives that stay out of your way. No clutter, no
-          learning curve — just momentum.
+          Powerful primitives that stay out of your way. No clutter, no learning
+          curve — just momentum.
         </p>
       </div>
 

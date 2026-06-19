@@ -1,7 +1,5 @@
 import { type PricingCardType } from "@/types/pricing";
-import React from "react";
 import Link from "next/link";
-import { SignUpButton } from "@clerk/nextjs";
 
 export default function PricingCard({ card }: { card: PricingCardType }) {
   const isCustom = card.price === "Custom";
@@ -15,19 +13,20 @@ export default function PricingCard({ card }: { card: PricingCardType }) {
       }`}
     >
       {card.isMostPopular && (
-        <span className="absolute top-[-13px] left-1/2 -translate-x-1/2 bg-primary text-white text-[12px] font-semibold px-3 py-[5px] rounded-full select-none leading-none">
+        <span className="absolute -top-3.25 left-1/2 -translate-x-1/2 bg-primary text-white text-[12px] font-semibold px-3 py-[5px] rounded-full select-none leading-none">
           Most popular
         </span>
       )}
 
       <div>
         <h4 className="text-[17px] font-bold text-foreground">{card.tier}</h4>
-        <p className="text-muted text-[14px] mt-[6px] mb-5">{card.description}</p>
+        <p className="text-muted text-[14px] mt-1.5 mb-5">{card.description}</p>
       </div>
 
-      <div className="flex items-baseline gap-[4px] mb-[24px]">
+      <div className="flex items-baseline gap-1 mb-6">
         <span className="font-extrabold text-[44px] tracking-[-0.02em] text-foreground leading-none">
-          {isCustom ? "" : "$"}{card.price}
+          {isCustom ? "" : "$"}
+          {card.price}
         </span>
         {!isCustom && (
           <span className="text-muted text-[15px]">
@@ -43,7 +42,7 @@ export default function PricingCard({ card }: { card: PricingCardType }) {
           </button>
         </Link>
       ) : (
-        <SignUpButton>
+        <Link href="/sign-up" className="w-full">
           <button
             className={`w-full mb-6 ${
               card.isMostPopular ? "btn-brand-primary" : "btn-brand-secondary"
@@ -51,13 +50,15 @@ export default function PricingCard({ card }: { card: PricingCardType }) {
           >
             {card.cta}
           </button>
-        </SignUpButton>
+        </Link>
       )}
 
       <ul className="flex flex-col gap-3 text-[14px] text-secondary mt-auto">
         {card.features.map((feat) => (
           <li key={feat} className="flex items-start gap-2.5">
-            <span className="text-primary font-bold flex-shrink-0 select-none">✓</span>
+            <span className="text-primary font-bold shrink-0 select-none">
+              ✓
+            </span>
             <span>{feat}</span>
           </li>
         ))}
