@@ -14,9 +14,13 @@ export const signInSchema = z.object({
 export type SignInInput = z.infer<typeof signInSchema>;
 
 export const signUpSchema = z.object({
-  fullName: z
+  firstName: z
     .string()
-    .min(1, "Full name is required")
+    .min(1, "First name is required")
+    .transform((val) => val.trim()),
+  lastName: z
+    .string()
+    .min(1, "Last name is required")
     .transform((val) => val.trim()),
   email: z
     .string()

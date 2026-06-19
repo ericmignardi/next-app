@@ -15,7 +15,8 @@ export default function SignUp() {
   const [error, setError] = useState<string | null>(null);
   const [pendingVerification, setPendingVerification] = useState(false);
 
-  const [fullName, setFullName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
@@ -28,7 +29,8 @@ export default function SignUp() {
 
     // Validate inputs with Zod
     const validation = signUpSchema.safeParse({
-      fullName,
+      firstName,
+      lastName,
       email,
       password,
     });
@@ -41,16 +43,12 @@ export default function SignUp() {
     setLoading(true);
 
     try {
-      const parts = validation.data.fullName.split(/\s+/);
-      const firstName = parts[0] || "";
-      const lastName = parts.slice(1).join(" ") || "";
-
       // Initiate password sign-up
       const result = await signUp.password({
         emailAddress: validation.data.email,
         password: validation.data.password,
-        firstName,
-        lastName,
+        firstName: validation.data.firstName,
+        lastName: validation.data.lastName,
       });
 
       if (result.error) {
@@ -283,18 +281,33 @@ export default function SignUp() {
 
               {/* Form */}
               <form onSubmit={handleSignUp} className="flex flex-col gap-4">
-                <div>
-                  <label className="block text-sm font-semibold mb-1.5 text-gray-800">
-                    Full name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    placeholder="Jordan Avery"
-                    className="w-full bg-white border border-[#e2e8f0] rounded-xl px-3.5 py-3 text-[15px] focus:outline-none focus:border-[#4f46e5] focus:ring-4 focus:ring-[#4f46e5]/12 transition-all"
-                  />
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-sm font-semibold mb-1.5 text-gray-800">
+                      First name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      placeholder="Jordan"
+                      className="w-full bg-white border border-[#e2e8f0] rounded-xl px-3.5 py-3 text-[15px] focus:outline-none focus:border-[#4f46e5] focus:ring-4 focus:ring-[#4f46e5]/12 transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-1.5 text-gray-800">
+                      Last name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      placeholder="Avery"
+                      className="w-full bg-white border border-[#e2e8f0] rounded-xl px-3.5 py-3 text-[15px] focus:outline-none focus:border-[#4f46e5] focus:ring-4 focus:ring-[#4f46e5]/12 transition-all"
+                    />
+                  </div>
                 </div>
 
                 <div>
