@@ -4,6 +4,7 @@ import { useSignIn } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { signInSchema } from "@/types/auth";
 
 export default function SignIn() {
   const { signIn } = useSignIn();
@@ -20,14 +21,27 @@ export default function SignIn() {
     e.preventDefault();
     if (!signIn) return;
 
-    setLoading(true);
     setError(null);
+
+    // Validate inputs with Zod
+    const validation = signInSchema.safeParse({
+      email,
+      password,
+      keepSignedIn,
+    });
+
+    if (!validation.success) {
+      setError(validation.error.issues[0]?.message || "Invalid input data");
+      return;
+    }
+
+    setLoading(true);
 
     try {
       // Perform password authentication
       const result = await signIn.password({
-        emailAddress: email,
-        password,
+        emailAddress: validation.data.email,
+        password: validation.data.password,
       });
 
       if (result.error) {

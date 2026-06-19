@@ -4,6 +4,7 @@ import { useSignUp, useSignIn } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { signUpSchema, verificationSchema } from "@/types/auth";
 
 export default function SignUp() {
   const { signUp } = useSignUp();
@@ -23,18 +24,31 @@ export default function SignUp() {
     e.preventDefault();
     if (!signUp) return;
 
-    setLoading(true);
     setError(null);
 
+    // Validate inputs with Zod
+    const validation = signUpSchema.safeParse({
+      fullName,
+      email,
+      password,
+    });
+
+    if (!validation.success) {
+      setError(validation.error.issues[0]?.message || "Invalid input data");
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      const parts = fullName.trim().split(/\s+/);
+      const parts = validation.data.fullName.split(/\s+/);
       const firstName = parts[0] || "";
       const lastName = parts.slice(1).join(" ") || "";
 
       // Initiate password sign-up
       const result = await signUp.password({
-        emailAddress: email,
-        password,
+        emailAddress: validation.data.email,
+        password: validation.data.password,
         firstName,
         lastName,
       });
@@ -73,12 +87,20 @@ export default function SignUp() {
     e.preventDefault();
     if (!signUp) return;
 
-    setLoading(true);
     setError(null);
+
+    // Validate inputs with Zod
+    const validation = verificationSchema.safeParse({ code });
+    if (!validation.success) {
+      setError(validation.error.issues[0]?.message || "Invalid code");
+      return;
+    }
+
+    setLoading(true);
 
     try {
       // Attempt verification
-      const verifyRes = await signUp.verifications.verifyEmailCode({ code });
+      const verifyRes = await signUp.verifications.verifyEmailCode({ code: validation.data.code });
       if (verifyRes.error) {
         setError(verifyRes.error.message);
         return;
