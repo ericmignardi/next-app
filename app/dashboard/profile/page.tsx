@@ -1,7 +1,6 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
-import React from "react";
 
 export default async function Profile() {
   const { userId } = await auth();
@@ -18,9 +17,7 @@ export default async function Profile() {
     return notFound();
   }
 
-  const displayName = [user.firstName, user.lastName]
-    .filter(Boolean)
-    .join(" ");
+  const displayName = [user.firstName, user.lastName].filter(Boolean).join(" ");
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -28,4 +25,3 @@ export default async function Profile() {
     </div>
   );
 }
-
