@@ -1,57 +1,131 @@
 import { render, screen } from "@testing-library/react";
 import Page from "@/app/page";
 
-// Mock next/navigation for router context in JSDOM environment
-jest.mock("next/navigation", () => ({
-  useRouter: () => ({
-    push: jest.fn(),
-    replace: jest.fn(),
-    prefetch: jest.fn(),
-  }),
-  usePathname: () => "/",
-}));
-
-describe("Landing/Home Page Integration", () => {
-  it("renders the main hero header and description text", () => {
+describe("Landing Page Integration", () => {
+  it("renders the hero heading and description", () => {
     render(<Page />);
 
-    // Check main heading in Hero component
     const heroHeading = screen.getByRole("heading", { level: 1 });
     expect(heroHeading).toHaveTextContent(/gets things done/i);
 
-    // Check product description
-    expect(screen.getByText(/Lumen brings your projects, docs, and data/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Lumen brings your projects, docs, and data/i)
+    ).toBeInTheDocument();
   });
 
-  it("renders multiple 'Start for free' buttons linking to sign-up", () => {
+  it('renders "Start for free" CTA buttons with links to /sign-up', () => {
     render(<Page />);
 
-    // Hero or CTA should contain a CTA button with "Start for free"
-    const startButtons = screen.getAllByRole("button", { name: /start for free/i });
+    const startButtons = screen.getAllByRole("button", {
+      name: /start for free/i,
+    });
     expect(startButtons.length).toBeGreaterThanOrEqual(1);
 
-    // Links to sign-up / sign-in
     const signUpLinks = screen.getAllByRole("link").filter(
       (link) => link.getAttribute("href") === "/sign-up"
     );
     expect(signUpLinks.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("renders navigation links in the header", () => {
+  it("renders navigation links (Features, Pricing, Docs, Customers)", () => {
     render(<Page />);
-    
-    // Links to features, pricing, etc. (using getAllByRole to avoid ambiguity due to multiple links)
-    expect(screen.getAllByRole("link", { name: /features/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole("link", { name: /pricing/i }).length).toBeGreaterThan(0);
+
+    expect(
+      screen.getAllByRole("link", { name: /features/i }).length
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByRole("link", { name: /pricing/i }).length
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByRole("link", { name: /docs/i }).length
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByRole("link", { name: /customers/i }).length
+    ).toBeGreaterThan(0);
   });
 
-  it("renders pricing plans and statistics components", () => {
+  it('renders the pricing section with "Simple, honest pricing" heading', () => {
     render(<Page />);
 
-    // Pricing header check (h3 tag)
-    expect(screen.getByRole("heading", { name: /Simple, honest pricing/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /Simple, honest pricing/i })
+    ).toBeInTheDocument();
+  });
 
-    // Statistics section verification
-    expect(screen.getByText(/Teams onboarded/i)).toBeInTheDocument();
+  it("renders all 3 pricing tiers (Starter, Team, Enterprise)", () => {
+    render(<Page />);
+
+    expect(screen.getByText("Starter")).toBeInTheDocument();
+    expect(screen.getByText("Team")).toBeInTheDocument();
+    expect(screen.getByText("Enterprise")).toBeInTheDocument();
+  });
+
+  it("renders the statistics section with all stat values", () => {
+    render(<Page />);
+
+    expect(screen.getByText("12k+")).toBeInTheDocument();
+    expect(screen.getByText("99.99%")).toBeInTheDocument();
+    expect(screen.getByText("48ms")).toBeInTheDocument();
+    expect(screen.getByText("4.9/5")).toBeInTheDocument();
+  });
+
+  it("renders all 6 service feature titles", () => {
+    render(<Page />);
+
+    expect(screen.getByText("Lightning fast")).toBeInTheDocument();
+    expect(screen.getByText("Real-time sync")).toBeInTheDocument();
+    expect(screen.getByText("Granular controls")).toBeInTheDocument();
+    expect(screen.getByText("Automations")).toBeInTheDocument();
+    expect(screen.getByText("Insightful analytics")).toBeInTheDocument();
+    expect(screen.getByText("Enterprise security")).toBeInTheDocument();
+  });
+
+  it("renders testimonial with author name", () => {
+    render(<Page />);
+
+    expect(screen.getByText("Jordan Avery")).toBeInTheDocument();
+  });
+
+  it('renders CTA section with "Ready to give your team momentum?"', () => {
+    render(<Page />);
+
+    expect(
+      screen.getByRole("heading", {
+        name: /Ready to give your team momentum\?/i,
+      })
+    ).toBeInTheDocument();
+  });
+
+  it("renders footer with Product, Company, Legal columns", () => {
+    render(<Page />);
+
+    expect(screen.getByText("Product")).toBeInTheDocument();
+    expect(screen.getByText("Company")).toBeInTheDocument();
+    expect(screen.getByText("Legal")).toBeInTheDocument();
+  });
+
+  it("renders footer copyright with current year", () => {
+    render(<Page />);
+
+    const currentYear = new Date().getFullYear();
+    expect(
+      screen.getByText(new RegExp(`© ${currentYear} Lumen Inc`))
+    ).toBeInTheDocument();
+  });
+
+  it('renders "Trusted by fast-moving teams" logos section', () => {
+    render(<Page />);
+
+    expect(screen.getByText("Trusted by fast-moving teams")).toBeInTheDocument();
+  });
+
+  it("renders all 5 logo brand names", () => {
+    render(<Page />);
+
+    expect(screen.getByText("acme")).toBeInTheDocument();
+    expect(screen.getByText("globex")).toBeInTheDocument();
+    expect(screen.getByText("hooli")).toBeInTheDocument();
+    expect(screen.getByText("initech")).toBeInTheDocument();
+    expect(screen.getByText("umbra")).toBeInTheDocument();
   });
 });

@@ -1,6 +1,9 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 
+// ---------------------------------------------------------------------------
+// Global mock: @clerk/nextjs
+// ---------------------------------------------------------------------------
 jest.mock('@clerk/nextjs', () => {
   return {
     ClerkProvider: ({ children }: { children: React.ReactNode }) => children,
@@ -33,5 +36,43 @@ jest.mock('@clerk/nextjs', () => {
         status: 'needs_verification',
       },
     }),
+  };
+});
+
+// ---------------------------------------------------------------------------
+// Global mock: next/navigation
+// ---------------------------------------------------------------------------
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    prefetch: jest.fn(),
+    back: jest.fn(),
+    forward: jest.fn(),
+    refresh: jest.fn(),
+  }),
+  usePathname: () => '/',
+  useSearchParams: () => new URLSearchParams(),
+  redirect: jest.fn(),
+  notFound: jest.fn(),
+}));
+
+// ---------------------------------------------------------------------------
+// Global mock: @mux/mux-player-react
+// ---------------------------------------------------------------------------
+jest.mock('@mux/mux-player-react', () => {
+  const MuxPlayer = React.forwardRef(
+    (props: Record<string, unknown>, ref: React.Ref<HTMLVideoElement>) =>
+      React.createElement('video', {
+        ref,
+        'data-testid': 'mux-player',
+        'data-playback-id': props.playbackId,
+        ...props,
+      }),
+  );
+  MuxPlayer.displayName = 'MuxPlayer';
+  return {
+    __esModule: true,
+    default: MuxPlayer,
   };
 });
