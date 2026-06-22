@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -21,4 +16,37 @@ model User {
   imageUrl  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  videos    Video[]
+}
+
+model Video {
+  id            String      @id @default(cuid())
+  title         String
+  description   String?
+  sport         String      // e.g., "Hockey", "Baseball"
+  year          String      // e.g., "1998", "2002-03"
+  team          String
+  gameType      String      // e.g., "Regular Season", "Playoffs"
+  jerseyNumber  Int?
+  
+  // Mux HLS Streaming Asset Keys
+  muxAssetId    String      @unique
+  muxPlaybackId String      @unique
+  
+  userId        String      
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  highlights    Highlight[]
+  
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Highlight {
+  id        String   @id @default(cuid())
+  videoId   String
+  video     Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  timestamp String   // e.g., "14:20" or "01:23:45"
+  label     String   // e.g., "3rd Period Goal"
+  createdAt DateTime @default(now())
 }
