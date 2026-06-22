@@ -1,47 +1,125 @@
-import { formatCurrency, truncate, cn } from '@/lib/utils'
+import { cn } from "@/lib/utils";
+import { signInSchema, signUpSchema } from "@/types/auth";
+import { videoFormSchema } from "@/types/video";
 
-describe('formatCurrency', () => {
-  it('formats a positive number as USD by default', () => {
-    expect(formatCurrency(1234.5)).toBe('$1,234.50')
-  })
+describe("cn utility", () => {
+  it("merges class names correctly", () => {
+    expect(cn("foo", "bar")).toBe("foo bar");
+    expect(cn("foo", { bar: true, baz: false })).toBe("foo bar");
+    expect(cn("foo", undefined, null, "bar")).toBe("foo bar");
+  });
 
-  it('formats zero', () => {
-    expect(formatCurrency(0)).toBe('$0.00')
-  })
+  it("handles tailwind class conflicts correctly", () => {
+    expect(cn("px-2 py-1", "p-4")).toBe("p-4");
+  });
+});
 
-  it('formats a negative number', () => {
-    expect(formatCurrency(-99.99)).toBe('-$99.99')
-  })
+describe("Auth Schemas", () => {
+  describe("signInSchema", () => {
+    it("validates correct email and password", () => {
+      const valid = { email: "user@example.com", password: "password123" };
+      const parsed = signInSchema.safeParse(valid);
+      expect(parsed.success).toBe(true);
+    });
 
-  it('accepts a different currency', () => {
-    expect(formatCurrency(50, 'EUR', 'de-DE')).toMatch(/50/)
-  })
-})
+    it("rejects invalid email formats", () => {
+      const invalid = { email: "invalid-email", password: "password123" };
+      const parsed = signInSchema.safeParse(invalid);
+      expect(parsed.success).toBe(false);
+      if (!parsed.success) {
+        expect(parsed.error.issues[0]?.message).toMatch(/invalid email/i);
+      }
+    });
 
-describe('truncate', () => {
-  it('returns the original string when within limit', () => {
-    expect(truncate('hello', 10)).toBe('hello')
-  })
+    it("rejects empty password", () => {
+      const invalid = { email: "user@example.com", password: "" };
+      const parsed = signInSchema.safeParse(invalid);
+      expect(parsed.success).toBe(false);
+    });
+  });
 
-  it('truncates and appends ellipsis when over limit', () => {
-    expect(truncate('hello world', 5)).toBe('hello…')
-  })
+  describe("signUpSchema", () => {
+    it("trims whitespace from first and last names", () => {
+      const input = {
+        firstName: "  John  ",
+        lastName: "  Doe  ",
+        email: "john@example.com",
+        password: "securepassword123",
+      };
+      const parsed = signUpSchema.safeParse(input);
+      expect(parsed.success).toBe(true);
+      if (parsed.success) {
+        expect(parsed.data.firstName).toBe("John");
+        expect(parsed.data.lastName).toBe("Doe");
+      }
+    });
 
-  it('returns unchanged string at exact limit', () => {
-    expect(truncate('abcde', 5)).toBe('abcde')
-  })
-})
+    it("requires password to be at least 8 characters long", () => {
+      const input = {
+        firstName: "John",
+        lastName: "Doe",
+        email: "john@example.com",
+        password: "short",
+      };
+      const parsed = signUpSchema.safeParse(input);
+      expect(parsed.success).toBe(false);
+      if (!parsed.success) {
+        expect(parsed.error.issues[0]?.message).toMatch(/at least 8 characters/i);
+      }
+    });
+  });
+});
 
-describe('cn', () => {
-  it('joins class strings', () => {
-    expect(cn('foo', 'bar')).toBe('foo bar')
-  })
+describe("Video Form Schema", () => {
+  it("validates valid video data", () => {
+    const valid = {
+      title: "Gold Medal Match",
+      sport: "Hockey",
+      year: "2026",
+      team: "Team Canada",
+      gameType: "Finals",
+      highlights: [
+        { timestamp: "12:34", label: "Goal" },
+        { timestamp: "01:23:45", label: "Intermission" },
+      ],
+    };
+    const parsed = videoFormSchema.safeParse(valid);
+    expect(parsed.success).toBe(true);
+  });
 
-  it('filters out falsy values', () => {
-    expect(cn('foo', false, null, undefined, 'bar')).toBe('foo bar')
-  })
+  it("rejects invalid highlights timestamp format", () => {
+    const invalid = {
+      title: "Gold Medal Match",
+      sport: "Hockey",
+      year: "2026",
+      team: "Team Canada",
+      gameType: "Finals",
+      highlights: [{ timestamp: "12-34", label: "Goal" }],
+    };
+    const parsed = videoFormSchema.safeParse(invalid);
+    expect(parsed.success).toBe(false);
+    if (!parsed.success) {
+      expect(parsed.error.issues[0]?.message).toMatch(/format must be MM:SS or HH:MM:SS/i);
+    }
+  });
 
-  it('returns empty string when all values are falsy', () => {
-    expect(cn(false, null, undefined)).toBe('')
-  })
-})
+  it("requires a non-empty title, sport, year, team, and gameType", () => {
+    const invalid = {
+      title: "",
+      sport: "",
+      year: "",
+      team: "",
+      gameType: "",
+    };
+    const parsed = videoFormSchema.safeParse(invalid);
+    expect(parsed.success).toBe(false);
+    if (!parsed.success) {
+      const fields = parsed.error.issues.map((e) => e.path[0]);
+      expect(fields).toContain("title");
+      expect(fields).toContain("sport");
+      expect(fields).toContain("year");
+      expect(fields).toContain("team");
+      expect(fields).toContain("gameType");
+    }
+  });
+});
