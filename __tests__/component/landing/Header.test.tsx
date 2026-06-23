@@ -6,8 +6,8 @@ describe("Header", () => {
     render(<Header />);
   });
 
-  it("renders 'Lumen' brand text", () => {
-    expect(screen.getByText("Lumen")).toBeInTheDocument();
+  it("renders 'Locker' brand text", () => {
+    expect(screen.getByText("Locker")).toBeInTheDocument();
   });
 
   it("renders Features, Pricing, Docs, Customers nav links", () => {

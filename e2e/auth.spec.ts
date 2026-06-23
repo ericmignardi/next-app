@@ -13,7 +13,7 @@ test.describe("Authentication Flows", () => {
       await expect(heading).toBeVisible();
 
       // Verify subtitle
-      await expect(page.getByText("Sign in to your Lumen account.")).toBeVisible();
+      await expect(page.getByText("Sign in to your LockerRoom account.")).toBeVisible();
 
       // Verify form labels
       await expect(page.getByText("Email", { exact: true })).toBeVisible();

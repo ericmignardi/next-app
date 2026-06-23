@@ -6,8 +6,8 @@ describe("Footer", () => {
     render(<Footer />);
   });
 
-  it("renders 'Lumen' brand text", () => {
-    expect(screen.getByText("Lumen")).toBeInTheDocument();
+  it("renders 'Locker' brand text", () => {
+    expect(screen.getByText("Locker")).toBeInTheDocument();
   });
 
   it("renders Product, Company, Legal column headings", () => {

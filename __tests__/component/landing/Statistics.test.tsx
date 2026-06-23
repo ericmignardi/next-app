@@ -7,16 +7,16 @@ describe("Statistics", () => {
   });
 
   it("renders all 4 stat values", () => {
-    expect(screen.getByText("12k+")).toBeInTheDocument();
-    expect(screen.getByText("99.99%")).toBeInTheDocument();
-    expect(screen.getByText("48ms")).toBeInTheDocument();
-    expect(screen.getByText("4.9/5")).toBeInTheDocument();
+    expect(screen.getByText("100%")).toBeInTheDocument();
+    expect(screen.getByText("240+ Hrs")).toBeInTheDocument();
+    expect(screen.getByText("< 50ms")).toBeInTheDocument();
+    expect(screen.getByText("1080p")).toBeInTheDocument();
   });
 
   it("renders all 4 stat labels", () => {
-    expect(screen.getByText(/teams onboarded/i)).toBeInTheDocument();
-    expect(screen.getByText(/uptime sla/i)).toBeInTheDocument();
-    expect(screen.getByText(/median response/i)).toBeInTheDocument();
-    expect(screen.getByText(/average rating/i)).toBeInTheDocument();
+    expect(screen.getByText(/private access/i)).toBeInTheDocument();
+    expect(screen.getByText(/tapes digitized/i)).toBeInTheDocument();
+    expect(screen.getByText(/highlight seek/i)).toBeInTheDocument();
+    expect(screen.getByText(/preserved quality/i)).toBeInTheDocument();
   });
 });

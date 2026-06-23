@@ -1,8 +1,9 @@
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Play, Calendar } from "lucide-react";
 import { VideoPlayerShell } from "@/components/video/video-player-shell";
+import { Badge } from "@/components/ui/badge";
 
 interface WatchPageProps {
   params: Promise<{ id: string }>;
@@ -29,44 +30,118 @@ export default async function WatchPage({ params }: WatchPageProps) {
     notFound();
   }
 
+  // 2. Fetch other recommendations for the right-hand column sidebar
+  const otherVideos = await prisma.video.findMany({
+    where: {
+      NOT: {
+        id: video.id,
+        muxPlaybackId: { startsWith: "pending_" },
+      },
+    },
+    take: 4,
+    orderBy: { createdAt: "desc" },
+  });
+
   return (
-    <div className="bg-slate-50 min-h-screen pb-12">
+    <div className="bg-[#070a13] text-slate-100 min-h-screen pb-16 relative">
+      {/* Dynamic ambient backlight */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl pointer-events-none z-0"></div>
+
       {/* Back to Discovery Navigation */}
-      <nav className="h-16 px-6 max-w-7xl mx-auto flex items-center">
+      <nav className="h-16 px-6 max-w-7xl mx-auto flex items-center relative z-10 border-b border-slate-900/60 bg-transparent backdrop-blur-md sticky top-0 mb-6">
         <Link
-          href="/"
-          className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors gap-1 group"
+          href="/dashboard"
+          className="inline-flex items-center text-sm font-semibold text-slate-400 hover:text-white transition-colors gap-1.5 group"
         >
           <ChevronLeft className="w-4 h-4 transform group-hover:-translate-x-0.5 transition-transform" />
-          Back to LockerRoom
+          Back to LockerRoom Vault
         </Link>
       </nav>
 
       {/* Main Structural Watch Layout Split Grid */}
-      <main className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <main className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
+        
         {/* Left 2-Columns: Dynamic Interactive Mux Player Component */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="rounded-2xl border border-slate-200 bg-black overflow-hidden shadow-md">
+        <div className="lg:col-span-2 space-y-5">
+          <div className="rounded-2xl border border-slate-900 bg-slate-950 overflow-hidden shadow-2xl">
             <VideoPlayerShell
               playbackId={video.muxPlaybackId}
               highlights={video.highlights}
             />
           </div>
 
-          <div className="space-y-1 pt-2">
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
+          <div className="space-y-2 pt-2 border-t border-slate-900">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge className="bg-blue-600 text-white font-bold text-[10px] uppercase border-none px-2 py-0.5">
+                {video.sport}
+              </Badge>
+              <Badge className="bg-slate-900 text-slate-400 border border-slate-800 font-medium text-[10px] px-2 py-0.5">
+                {video.gameType}
+              </Badge>
+            </div>
+            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
               {video.title}
             </h1>
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-              {video.team} • {video.year} {video.gameType}
+            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-blue-500" />
+              <span>{video.team} • {video.year}</span>
             </p>
             {video.description && (
-              <p className="text-sm text-slate-600 font-medium pt-2 max-w-2xl leading-relaxed">
+              <p className="text-sm text-slate-300 font-medium pt-3 max-w-3xl leading-relaxed">
                 {video.description}
               </p>
             )}
           </div>
         </div>
+
+        {/* Right Column: Other Videos Recommendations */}
+        <div className="space-y-5">
+          <div className="bg-[#090d19] border border-slate-900 rounded-2xl p-5 shadow-xl space-y-4">
+            <h3 className="text-xs font-bold tracking-widest uppercase text-slate-400 px-1 border-b border-slate-800/60 pb-2.5">
+              More from the Vault
+            </h3>
+
+            {otherVideos.length === 0 ? (
+              <p className="text-xs text-slate-500 font-medium italic px-1">
+                No other archived games cataloged yet.
+              </p>
+            ) : (
+              <div className="space-y-4">
+                {otherVideos.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={`/watch/${item.id}`}
+                    className="group flex gap-3 hover:bg-slate-800/10 p-2 rounded-xl transition-all"
+                  >
+                    <div className="relative aspect-video w-24 shrink-0 rounded-lg bg-slate-950 border border-slate-900 overflow-hidden">
+                      <img
+                        src={`https://image.mux.com/${item.muxPlaybackId}/thumbnail.webp?time=2&width=200`}
+                        alt={item.title}
+                        className="object-cover w-full h-full transform transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <Play className="w-3 h-3 text-white fill-white" />
+                      </div>
+                    </div>
+                    <div className="space-y-0.5 select-none min-w-0">
+                      <h4 className="font-bold text-white text-xs tracking-tight line-clamp-1 leading-snug group-hover:text-blue-400 transition-colors">
+                        {item.title}
+                      </h4>
+                      <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider truncate">
+                        {item.year} • {item.team}
+                      </p>
+                      <Badge className="bg-slate-900/65 text-slate-400 text-[8px] font-bold px-1.5 py-0.25 border border-slate-800 capitalize w-fit block mt-1">
+                        {item.sport}
+                      </Badge>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
       </main>
     </div>
   );

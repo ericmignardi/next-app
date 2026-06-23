@@ -19,7 +19,7 @@ export function MediaRow({ title, description, videos }: MediaRowProps) {
   return (
     <div className="space-y-3 py-4">
       <div>
-        <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+        <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
           {title}
         </h2>
         {description && (

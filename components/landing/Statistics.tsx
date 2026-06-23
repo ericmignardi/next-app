@@ -11,40 +11,40 @@ export default function Statistics() {
         {/* Stat 1 */}
         <div className="flex flex-col items-center text-center">
           <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
-            12k+
+            100%
           </h4>
           <p className="text-[15px] text-white/80 mt-1.5 font-medium">
-            Teams onboarded
+            Private Access
           </p>
         </div>
 
         {/* Stat 2 */}
         <div className="flex flex-col items-center text-center">
           <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
-            99.99%
+            240+ Hrs
           </h4>
           <p className="text-[15px] text-white/80 mt-1.5 font-medium">
-            Uptime SLA
+            Tapes Digitized
           </p>
         </div>
 
         {/* Stat 3 */}
         <div className="flex flex-col items-center text-center">
           <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
-            48ms
+            &lt; 50ms
           </h4>
           <p className="text-[15px] text-white/80 mt-1.5 font-medium">
-            Median response
+            Highlight Seek
           </p>
         </div>
 
         {/* Stat 4 */}
         <div className="flex flex-col items-center text-center">
           <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
-            4.9/5
+            1080p
           </h4>
           <p className="text-[15px] text-white/80 mt-1.5 font-medium">
-            Average rating
+            Preserved Quality
           </p>
         </div>
       </div>

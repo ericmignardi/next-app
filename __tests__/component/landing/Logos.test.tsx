@@ -6,17 +6,17 @@ describe("Logos", () => {
     render(<Logos />);
   });
 
-  it("renders 'Trusted by fast-moving teams' text", () => {
+  it("renders 'Supported Archival Formats' text", () => {
     expect(
-      screen.getByText(/trusted by fast-moving teams/i)
+      screen.getByText(/supported archival formats/i)
     ).toBeInTheDocument();
   });
 
-  it("renders all 5 logo names", () => {
-    expect(screen.getByText("acme")).toBeInTheDocument();
-    expect(screen.getByText("globex")).toBeInTheDocument();
-    expect(screen.getByText("hooli")).toBeInTheDocument();
-    expect(screen.getByText("initech")).toBeInTheDocument();
-    expect(screen.getByText("umbra")).toBeInTheDocument();
+  it("renders all 5 format names", () => {
+    expect(screen.getByText("VHS Tapes")).toBeInTheDocument();
+    expect(screen.getByText("8mm Film")).toBeInTheDocument();
+    expect(screen.getByText("MiniDV")).toBeInTheDocument();
+    expect(screen.getByText("Hi8 Tape")).toBeInTheDocument();
+    expect(screen.getByText("Digital HD")).toBeInTheDocument();
   });
 });

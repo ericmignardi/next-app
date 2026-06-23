@@ -7,14 +7,16 @@ export default function Footer() {
         {/* Column 1 */}
         <div className="flex flex-col items-start">
           <div className="flex items-center gap-2.5 select-none mb-3.5">
-            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-              <div className="w-3 h-3 bg-white rotate-45 rounded-xs"></div>
+            <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm">
+              <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
             </div>
-            <span className="font-bold text-lg text-foreground">Lumen</span>
+            <span className="font-bold text-lg text-foreground">Locker<span className="text-blue-600">Room</span></span>
           </div>
 
-          <p className="text-[14px] text-muted max-w-60 leading-[1.55] m-0">
-            The fast, beautiful workspace for teams who ship.
+          <p className="text-[14px] text-muted max-w-65 leading-[1.55] m-0">
+            Secure, high-fidelity digital sports video archives for families.
           </p>
         </div>
 
@@ -116,7 +118,7 @@ export default function Footer() {
       <div className="border-t border-muted/10 bg-card">
         <div className="max-w-300 mx-auto px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
           <span className="text-[13px] text-muted/80 select-none">
-            © {new Date().getFullYear()} Lumen Inc. All rights reserved.
+            © {new Date().getFullYear()} LockerRoom Inc. All rights reserved.
           </span>
           <span className="font-mono text-[12px] text-muted/60 select-none">
             made with care

@@ -6,37 +6,37 @@ describe("Pricing", () => {
     render(<Pricing />);
   });
 
-  it("renders 'Simple, honest pricing' heading", () => {
+  it("renders 'Simple plans for families' heading", () => {
     expect(
-      screen.getByRole("heading", { name: /simple, honest pricing/i })
+      screen.getByRole("heading", { name: /simple plans for families/i })
     ).toBeInTheDocument();
   });
 
-  it("renders all 3 tier names: Starter, Team, Enterprise", () => {
-    expect(screen.getByText("Starter")).toBeInTheDocument();
-    expect(screen.getByText("Team")).toBeInTheDocument();
-    expect(screen.getByText("Enterprise")).toBeInTheDocument();
+  it("renders all 3 tier names: Free Viewer, Family Archivist, Grand Historian", () => {
+    expect(screen.getByText("Free Viewer")).toBeInTheDocument();
+    expect(screen.getByText("Family Archivist")).toBeInTheDocument();
+    expect(screen.getByText("Grand Historian")).toBeInTheDocument();
   });
 
-  it("renders prices: $0, $24, Custom", () => {
+  it("renders prices: $0, $9, $29", () => {
     expect(screen.getByText(/\$0/)).toBeInTheDocument();
-    expect(screen.getByText(/\$24/)).toBeInTheDocument();
-    expect(screen.getByText("Custom")).toBeInTheDocument();
+    expect(screen.getByText(/\$9/)).toBeInTheDocument();
+    expect(screen.getByText(/\$29/)).toBeInTheDocument();
   });
 
   it("renders 'Most popular' badge", () => {
     expect(screen.getByText(/most popular/i)).toBeInTheDocument();
   });
 
-  it("renders CTA buttons: 'Get started', 'Start free trial', 'Contact sales'", () => {
+  it("renders CTA buttons: 'Start Streaming', 'Create Family Vault', 'Unlock Grand Vault'", () => {
     expect(
-      screen.getByRole("button", { name: /get started/i })
+      screen.getByRole("button", { name: /start streaming/i })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /start free trial/i })
+      screen.getByRole("button", { name: /create family vault/i })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /contact sales/i })
+      screen.getByRole("button", { name: /unlock grand vault/i })
     ).toBeInTheDocument();
   });
 

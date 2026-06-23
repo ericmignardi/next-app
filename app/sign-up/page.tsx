@@ -174,45 +174,47 @@ export default function SignUp() {
           href="/"
           className="flex items-center gap-2.5 hover:opacity-90 transition-opacity self-start"
         >
-          <div className="w-7.5 h-7.5 rounded-lg bg-[#4f46e5] flex items-center justify-center">
-            <div className="w-3.25 h-3.25 bg-white rotate-45 rounded-xs"></div>
+          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-md shadow-blue-500/20">
+            <svg className="w-4.5 h-4.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
           </div>
           <span className="font-bold text-[19px] tracking-[-0.02em] text-white">
-            Lumen
+            Locker<span className="text-blue-500">Room</span>
           </span>
         </Link>
 
         {/* Feature List */}
         <div className="my-auto py-12 max-w-105">
           <h2 className="text-white text-3xl lg:text-[32px] font-extrabold leading-tight tracking-tight mb-6">
-            Start building with your team in minutes.
+            Start archiving your family sports legacy.
           </h2>
 
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3 text-[#cbd5e1] text-[15px]">
-              <span className="w-5.5 h-5.5 rounded-full bg-[#4f46e5] text-white flex items-center justify-center text-[12px] font-bold shrink-0">
+              <span className="w-5.5 h-5.5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px] font-bold shrink-0">
                 ✓
               </span>
-              <span>Free 14-day trial, no card needed</span>
+              <span>100% Private, guest code security</span>
             </div>
             <div className="flex items-center gap-3 text-[#cbd5e1] text-[15px]">
-              <span className="w-5.5 h-5.5 rounded-full bg-[#4f46e5] text-white flex items-center justify-center text-[12px] font-bold shrink-0">
+              <span className="w-5.5 h-5.5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px] font-bold shrink-0">
                 ✓
               </span>
-              <span>Set up your workspace in 2 minutes</span>
+              <span>Adaptive HLS buffer-free streaming</span>
             </div>
             <div className="flex items-center gap-3 text-[#cbd5e1] text-[15px]">
-              <span className="w-5.5 h-5.5 rounded-full bg-[#4f46e5] text-white flex items-center justify-center text-[12px] font-bold shrink-0">
+              <span className="w-5.5 h-5.5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px] font-bold shrink-0">
                 ✓
               </span>
-              <span>Cancel anytime, keep your data</span>
+              <span>Interactive timeline highlight seekers</span>
             </div>
           </div>
         </div>
 
         {/* Footer */}
         <div className="text-[13px] text-[#64748b]">
-          © {new Date().getFullYear()} Lumen Inc.
+          © {new Date().getFullYear()} LockerRoom Inc.
         </div>
       </div>
 

@@ -8,21 +8,21 @@ describe("Services", () => {
 
   it("renders section heading", () => {
     expect(
-      screen.getByText(/built for the way teams really work/i)
+      screen.getByText(/everything you need for your family archives/i)
     ).toBeInTheDocument();
   });
 
   it("renders all 6 service titles", () => {
-    expect(screen.getByText("Lightning fast")).toBeInTheDocument();
-    expect(screen.getByText("Real-time sync")).toBeInTheDocument();
-    expect(screen.getByText("Granular controls")).toBeInTheDocument();
-    expect(screen.getByText("Automations")).toBeInTheDocument();
-    expect(screen.getByText("Insightful analytics")).toBeInTheDocument();
-    expect(screen.getByText("Enterprise security")).toBeInTheDocument();
+    expect(screen.getByText("High Fidelity Streaming")).toBeInTheDocument();
+    expect(screen.getByText("Interactive Highlights")).toBeInTheDocument();
+    expect(screen.getByText("Private Vault Security")).toBeInTheDocument();
+    expect(screen.getByText("Era & Season Browsing")).toBeInTheDocument();
+    expect(screen.getByText("Nostalgic Format Support")).toBeInTheDocument();
+    expect(screen.getByText("Archivist Control Grid")).toBeInTheDocument();
   });
 
   it("renders descriptions for each service", () => {
-    const serviceCards = screen.getAllByText(/Lightning fast|Real-time sync|Granular controls|Automations|Insightful analytics|Enterprise security/);
+    const serviceCards = screen.getAllByText(/High Fidelity Streaming|Interactive Highlights|Private Vault Security|Era & Season Browsing|Nostalgic Format Support|Archivist Control Grid/);
     expect(serviceCards).toHaveLength(6);
   });
 });

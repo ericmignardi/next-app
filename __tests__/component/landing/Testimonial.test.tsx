@@ -11,14 +11,14 @@ describe("Testimonial", () => {
   });
 
   it("renders testimonial quote", () => {
-    expect(screen.getByText(/replaced four tools/i)).toBeInTheDocument();
+    expect(screen.getByText(/digitized over 20 years/i)).toBeInTheDocument();
   });
 
   it("renders author name 'Jordan Avery'", () => {
     expect(screen.getByText("Jordan Avery")).toBeInTheDocument();
   });
 
-  it("renders role 'VP Operations, Northwind'", () => {
-    expect(screen.getByText(/VP Operations, Northwind/)).toBeInTheDocument();
+  it("renders role 'Family Archivist & Team Captain'", () => {
+    expect(screen.getByText(/Family Archivist & Team Captain/)).toBeInTheDocument();
   });
 });

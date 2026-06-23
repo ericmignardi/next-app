@@ -86,7 +86,7 @@ export function UploadForm({ onSuccess }: { onSuccess: () => void }) {
   return (
     <form
       onSubmit={form.handleSubmit(onSubmit)}
-      className="space-y-6 max-w-xl bg-white p-6 rounded-lg border border-slate-100"
+      className="space-y-6 max-w-xl bg-transparent p-0 border-none shadow-none"
     >
       <div className="space-y-2">
         <Label htmlFor="video-file">Video File</Label>
@@ -151,9 +151,9 @@ export function UploadForm({ onSuccess }: { onSuccess: () => void }) {
       </div>
 
       {/* Dynamic Highlight Array Blocks */}
-      <div className="space-y-4 pt-2 border-t border-slate-100">
+      <div className="space-y-4 pt-2 border-t border-slate-800/80">
         <div className="flex justify-between items-center">
-          <Label className="text-sm font-semibold">
+          <Label className="text-sm font-semibold text-slate-300">
             Game Highlights / Markers
           </Label>
           <Button
@@ -162,6 +162,7 @@ export function UploadForm({ onSuccess }: { onSuccess: () => void }) {
             size="sm"
             onClick={() => append({ timestamp: "00:00", label: "" })}
             disabled={isUploading}
+            className="border-slate-800 hover:bg-slate-900 text-slate-300 hover:text-white"
           >
             <Plus className="w-4 h-4 mr-1" /> Add Highlight
           </Button>

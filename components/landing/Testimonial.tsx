@@ -11,26 +11,20 @@ export default function Testimonial() {
 
       {/* Quote */}
       <p className="text-[24px] sm:text-[28px] leading-[1.45] font-semibold text-foreground tracking-[-0.02em] mb-7 max-w-190">
-        &quot;We replaced four tools with Lumen in a week. Our team ships
-        faster, the data is finally trustworthy, and onboarding new hires takes
-        an afternoon.&quot;
+        &quot;We digitized over 20 years of family hockey and baseball tapes. LockerRoom makes it feel like our own private streaming channel — my grandfather can watch on his iPad and jump straight to the highlight goals.&quot;
       </p>
 
       {/* Profile Info */}
       <div className="flex items-center gap-3">
         {/* Avatar placeholder with striped gradient pattern */}
-        <div
-          className="w-11 h-11 rounded-full shrink-0 border border-muted/20"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(135deg, var(--background), var(--background) 6px, var(--background-card) 6px, var(--background-card) 12px)",
-          }}
-        ></div>
+        <div className="w-11 h-11 rounded-full bg-blue-600/10 border border-blue-500/20 flex items-center justify-center font-bold text-blue-600 text-sm">
+          JA
+        </div>
         <div className="text-left">
           <p className="font-bold text-[15px] text-foreground leading-tight">
             Jordan Avery
           </p>
-          <p className="text-sm text-muted mt-1">VP Operations, Northwind</p>
+          <p className="text-sm text-muted mt-1">Family Archivist & Team Captain</p>
         </div>
       </div>
     </section>

@@ -128,11 +128,13 @@ export default function SignIn() {
           href="/"
           className="flex items-center gap-2.5 hover:opacity-90 transition-opacity self-start"
         >
-          <div className="w-7.5 h-7.5 rounded-lg bg-white flex items-center justify-center">
-            <div className="w-3.25 h-3.25 bg-[#4f46e5] rotate-45 rounded-xs"></div>
+          <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-md">
+            <svg className="w-4.5 h-4.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
           </div>
-          <span className="font-bold text-[19px] tracking-[-0.02em] text-white">
-            Lumen
+          <span className="font-bold text-[20px] tracking-tight text-white">
+            Locker<span className="text-amber-400">Room</span>
           </span>
         </Link>
 
@@ -142,8 +144,7 @@ export default function SignIn() {
             ★★★★★
           </div>
           <p className="text-white text-2xl lg:text-[26px] font-semibold leading-[1.4] tracking-[-0.02em] mb-6">
-            &quot;The one tool our whole team agreed on. It just gets out of the
-            way.&quot;
+            &quot;The easiest way to share digitized camcorder tapes with the whole family. Everyone can stream matches instantly.&quot;
           </p>
 
           <div className="flex items-center gap-3">
@@ -153,7 +154,7 @@ export default function SignIn() {
             <div>
               <div className="font-bold text-[15px] text-white">Sam Rivera</div>
               <div className="text-[13px] text-[#c7d2fe]">
-                Head of Product, Loop
+                Coach & Family Captain
               </div>
             </div>
           </div>
@@ -161,7 +162,7 @@ export default function SignIn() {
 
         {/* Footer */}
         <div className="text-[13px] text-[#c7d2fe]">
-          © {new Date().getFullYear()} Lumen Inc.
+          © {new Date().getFullYear()} LockerRoom Inc.
         </div>
       </div>
 
@@ -172,7 +173,7 @@ export default function SignIn() {
             Welcome back
           </h1>
           <p className="text-[15px] text-[#64748b] mb-8">
-            Sign in to your Lumen account.
+            Sign in to your LockerRoom account.
           </p>
 
           {/* Social Logins */}
