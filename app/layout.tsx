@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = Geist({
@@ -14,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lumen SaaS Workspace",
-  description: "Replicating Lumen SaaS design in Next.js",
+  title: "LockerRoom",
+  description: "Private family sports video vault",
 };
 
 export default function RootLayout({
@@ -30,6 +31,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ClerkProvider>
+                    <Toaster />
           {children}
         </ClerkProvider>
       </body>

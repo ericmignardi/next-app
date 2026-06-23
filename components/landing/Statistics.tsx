@@ -1,51 +1,40 @@
+const stats = [
+  {
+    value: "100%",
+    label: "Private Access",
+  },
+  {
+    value: "240+ Hrs",
+    label: "Tapes Digitized",
+  },
+  {
+    value: "< 50ms",
+    label: "Highlight Seek",
+  },
+  {
+    value: "1080p",
+    label: "Preserved Quality",
+  },
+];
+
 export default function Statistics() {
   return (
-    <section className="max-w-300 mx-auto my-12 px-8">
-      <div
-        className="bg-primary rounded-[20px] py-14 px-10 grid grid-cols-2 md:grid-cols-4 gap-8 relative overflow-hidden"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 85% 15%, rgba(255,255,255,0.12), transparent 45%)",
-        }}
-      >
-        {/* Stat 1 */}
-        <div className="flex flex-col items-center text-center">
-          <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
-            100%
-          </h4>
-          <p className="text-[15px] text-white/80 mt-1.5 font-medium">
-            Private Access
-          </p>
-        </div>
-
-        {/* Stat 2 */}
-        <div className="flex flex-col items-center text-center">
-          <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
-            240+ Hrs
-          </h4>
-          <p className="text-[15px] text-white/80 mt-1.5 font-medium">
-            Tapes Digitized
-          </p>
-        </div>
-
-        {/* Stat 3 */}
-        <div className="flex flex-col items-center text-center">
-          <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
-            &lt; 50ms
-          </h4>
-          <p className="text-[15px] text-white/80 mt-1.5 font-medium">
-            Highlight Seek
-          </p>
-        </div>
-
-        {/* Stat 4 */}
-        <div className="flex flex-col items-center text-center">
-          <h4 className="text-[46px] font-extrabold text-white tracking-[-0.02em] leading-none">
-            1080p
-          </h4>
-          <p className="text-[15px] text-white/80 mt-1.5 font-medium">
-            Preserved Quality
-          </p>
+    <section className="bg-[#070a13] py-16 px-6 sm:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-[#090d19] border border-slate-900 p-6 rounded-2xl text-center space-y-2 hover:border-slate-800 transition-all select-none"
+            >
+              <p className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-none bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
+                {stat.value}
+              </p>
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
+                {stat.label}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

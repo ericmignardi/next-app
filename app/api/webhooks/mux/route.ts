@@ -24,6 +24,7 @@ export async function POST(req: NextRequest) {
         data: {
           muxAssetId: muxAssetId,
           muxPlaybackId: muxPlaybackId,
+          duration: data.duration ?? null,
         },
       });
 

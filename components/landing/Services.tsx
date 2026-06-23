@@ -1,98 +1,71 @@
-import { ServiceCardType } from "@/types/services";
-import ServicesCard from "./ServicesCard";
+import { Video, Sparkles, Shield, Trophy, FileVideo, ShieldAlert } from "lucide-react";
 
-const serviceCards: ServiceCardType[] = [
+const services = [
   {
-    logo: () => (
-      <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
     title: "High Fidelity Streaming",
-    description:
-      "Buffer-free HLS streaming preserves the highest quality of your digitized family sports footage, scaled instantly to any device screen.",
-    iconBg: "bg-blue-500/10",
+    description: "Adaptive bitrates ensure smooth, buffer-free playback of your digitized home recordings on any modern screen.",
+    icon: Video,
   },
   {
-    logo: () => (
-      <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
     title: "Interactive Highlights",
-    description:
-      "Pin timeline markers with custom descriptions and seek the video player playhead to the exact second of game-winning goals.",
-    iconBg: "bg-blue-500/10",
+    description: "Navigate long athletic recordings instantly. Skip directly to match-winning scores with pinned timeline markers.",
+    icon: Sparkles,
   },
   {
-    logo: () => (
-      <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-      </svg>
-    ),
     title: "Private Vault Security",
-    description:
-      "Strict auth gates ensure only family members can access, search, and view your family legacy. No public links, no exposure.",
-    iconBg: "bg-blue-500/10",
+    description: "Rest easy with guest authentication codes. Only authorized family members can access and browse your video vault.",
+    icon: Shield,
   },
   {
-    logo: () => (
-      <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-    ),
     title: "Era & Season Browsing",
-    description:
-      "Organized horizontal carousels sort footage contextually by Sport Type, Era, Season, or specific Teams in an instant.",
-    iconBg: "bg-amber-500/10",
+    description: "Sort files dynamically by athletic discipline, seasonal campaign, player numbers, or game highlights index.",
+    icon: Trophy,
   },
   {
-    logo: () => (
-      <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-      </svg>
-    ),
     title: "Nostalgic Format Support",
-    description:
-      "Engineered to cleanly deliver tape transfers from classic formats, including VHS, Betamax, Super 8, Hi8, and digital camcorders.",
-    iconBg: "bg-amber-500/10",
+    description: "Digital transfers optimized for old physical media formats: VHS tapes, 8mm film reels, MiniDV, and Hi8 formats.",
+    icon: FileVideo,
   },
   {
-    logo: () => (
-      <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-      </svg>
-    ),
     title: "Archivist Control Grid",
-    description:
-      "A powerful, spreadsheet-style admin table lets you easily upload footage, modify game details, and build timeline markers in seconds.",
-    iconBg: "bg-blue-500/10",
+    description: "Manage video catalog metadata, edit play highlights, and manage access parameters from an intuitive workspace.",
+    icon: ShieldAlert,
   },
 ];
 
 export default function Services() {
   return (
-    <section id="features" className="max-w-300 mx-auto px-8 py-8 pb-10">
-      {/* Header */}
-      <div className="text-center max-w-180 mx-auto mb-14">
-        <span className="text-[14px] font-semibold text-blue-600 uppercase tracking-widest">
-          Preserve History
-        </span>
-        <h2 className="text-[36px] sm:text-[42px] font-extrabold tracking-tight text-foreground mt-3.5 mb-0">
-          Everything you need for your family archives
-        </h2>
-        <p className="text-lg text-muted mt-4 leading-[1.55]">
-          A customized digital vault with streaming layout and granular admin controls. Modern technology built to preserve old memories.
-        </p>
-      </div>
+    <section id="features" className="bg-[#090d19] border-y border-slate-900/60 py-20 px-6 sm:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto space-y-12">
+        {/* Section Header */}
+        <div className="text-center space-y-4 max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+            Everything you need for your family archives
+          </h2>
+          <p className="text-sm text-slate-400">
+            A comprehensive, premium suite of features tailored to preserve, organize, and relive your lifetime sports accomplishments.
+          </p>
+        </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {serviceCards.map((service) => (
-          <ServicesCard key={service.title} service={service} />
-        ))}
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service) => (
+            <div
+              key={service.title}
+              className="bg-[#070a13] border border-slate-800/80 hover:border-blue-900/60 p-6 rounded-2xl transition-all duration-300 group hover:shadow-xl hover:shadow-blue-500/2"
+            >
+              <div className="w-10 h-10 rounded-xl bg-blue-600/10 flex items-center justify-center mb-4 text-blue-400 group-hover:scale-105 transition-transform">
+                <service.icon className="w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2 tracking-tight group-hover:text-blue-400 transition-colors">
+                {service.title}
+              </h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                {service.description}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

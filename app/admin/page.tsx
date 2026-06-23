@@ -1,26 +1,13 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { Trash2, Film, Plus, Shield, ArrowLeft } from "lucide-react";
-import { deleteVideo } from "@/actions/actions";
+import { deleteVideo, refreshAdmin } from "@/actions/actions";
 import { UploadForm } from "@/components/admin/upload-form";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { DataTable } from "@/components/admin/data-table";
 
 export const revalidate = 0; // Absolute dynamic serving to bypass cache lags
 
@@ -74,121 +61,15 @@ export default async function AdminPage() {
                 </DialogTitle>
               </DialogHeader>
               <UploadForm
-                onSuccess={async () => {
-                  "use server";
-                  // Hard reload trigger
-                }}
+                onSuccess={refreshAdmin}
               />
             </DialogContent>
           </Dialog>
         </div>
       </div>
 
-      {/* Spreadsheet Style Data Table View */}
-      <div className="bg-[#090d19] border border-slate-900 rounded-2xl overflow-hidden shadow-xl relative z-10">
-        <Table>
-          <TableHeader className="bg-[#0c1322] border-b border-slate-900">
-            <TableRow className="hover:bg-transparent">
-              <TableHead className="font-bold text-slate-400 w-[260px] text-xs uppercase tracking-wider">
-                Video Title
-              </TableHead>
-              <TableHead className="font-bold text-slate-400 text-xs uppercase tracking-wider">
-                Sport
-              </TableHead>
-              <TableHead className="font-bold text-slate-400 text-xs uppercase tracking-wider">
-                Year
-              </TableHead>
-              <TableHead className="font-bold text-slate-400 text-xs uppercase tracking-wider">
-                Team Context
-              </TableHead>
-              <TableHead className="font-bold text-slate-400 text-xs uppercase tracking-wider">
-                Format Type
-              </TableHead>
-              <TableHead className="font-bold text-slate-400 text-xs uppercase tracking-wider">
-                Stream Status
-              </TableHead>
-              <TableHead className="w-[80px]"></TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {videos.length === 0 ? (
-              <TableRow className="hover:bg-transparent">
-                <TableCell
-                  colSpan={7}
-                  className="text-center py-20 text-slate-500 text-sm"
-                >
-                  <Film className="w-10 h-10 mx-auto mb-3 text-slate-600 opacity-60" />
-                  <p className="font-bold text-slate-400 text-base mb-1">No footage cataloged yet</p>
-                  <p className="text-slate-600 text-xs">Click the &quot;Upload Footage&quot; button above to begin.</p>
-                </TableCell>
-              </TableRow>
-            ) : (
-              videos.map((video) => {
-                const isPending = video.muxPlaybackId.startsWith("pending_");
-
-                return (
-                  <TableRow
-                    key={video.id}
-                    className="hover:bg-[#101626]/40 transition-colors border-b border-slate-900/60"
-                  >
-                    <TableCell className="font-bold text-white text-sm">
-                      {video.title}
-                    </TableCell>
-                    <TableCell>
-                      <Badge
-                        variant="outline"
-                        className="bg-slate-950 border-slate-800 text-slate-300 capitalize font-medium px-2.5 py-0.5 text-[10px]"
-                      >
-                        {video.sport}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-slate-300 font-medium text-xs">
-                      {video.year}
-                    </TableCell>
-                    <TableCell className="text-slate-300 font-medium text-xs">
-                      {video.team}
-                    </TableCell>
-                    <TableCell className="text-slate-400 font-medium text-xs">
-                      {video.gameType}
-                    </TableCell>
-                    <TableCell>
-                      {isPending ? (
-                        <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-amber-500 bg-amber-500/10 border border-amber-500/20 rounded-full px-2.5 py-0.75 animate-pulse">
-                          <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                          Transcoding...
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-2.5 py-0.75">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                          Ready to Stream
-                        </span>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      <form
-                        action={deleteVideo.bind(
-                          null,
-                          video.id,
-                          video.muxAssetId,
-                        )}
-                      >
-                        <Button
-                          type="submit"
-                          variant="ghost"
-                          size="icon"
-                          className="text-slate-500 hover:text-red-400 hover:bg-red-500/10 rounded-xl transition-all cursor-pointer"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </form>
-                    </TableCell>
-                  </TableRow>
-                );
-              })
-            )}
-          </TableBody>
-        </Table>
-      </div>
+      {/* Data Table Component */}
+      <DataTable videos={videos} />
     </div>
   );
 }

@@ -1,30 +1,23 @@
 export default function Testimonial() {
   return (
-    <section
-      id="customers"
-      className="max-w-205 mx-auto pt-14 pb-6 px-8 text-center flex flex-col items-center"
-    >
-      {/* 5-Star Rating */}
-      <div className="font-mono text-accent text-[28px] tracking-[2px] leading-none mb-5 select-none">
-        ★★★★★
-      </div>
-
-      {/* Quote */}
-      <p className="text-[24px] sm:text-[28px] leading-[1.45] font-semibold text-foreground tracking-[-0.02em] mb-7 max-w-190">
-        &quot;We digitized over 20 years of family hockey and baseball tapes. LockerRoom makes it feel like our own private streaming channel — my grandfather can watch on his iPad and jump straight to the highlight goals.&quot;
-      </p>
-
-      {/* Profile Info */}
-      <div className="flex items-center gap-3">
-        {/* Avatar placeholder with striped gradient pattern */}
-        <div className="w-11 h-11 rounded-full bg-blue-600/10 border border-blue-500/20 flex items-center justify-center font-bold text-blue-600 text-sm">
-          JA
+    <section id="customers" className="bg-[#070a13] py-20 px-6 sm:px-8 relative z-10">
+      <div className="max-w-4xl mx-auto text-center space-y-6">
+        {/* Stars */}
+        <div className="text-amber-500 text-xl tracking-[4px] select-none font-bold">
+          ★★★★★
         </div>
-        <div className="text-left">
-          <p className="font-bold text-[15px] text-foreground leading-tight">
-            Jordan Avery
+
+        {/* Quote */}
+        <blockquote className="text-white text-lg sm:text-2xl font-bold tracking-tight leading-relaxed max-w-3xl mx-auto">
+          &quot;LockerRoom helped us organize and secure our family sports archives. We digitized over 20 years of camcorder game tapes, practices, and season runs, and now the entire extended family streams them buffer-free.&quot;
+        </blockquote>
+
+        {/* Author Details */}
+        <div className="space-y-1">
+          <p className="text-sm font-bold text-white tracking-tight">Jordan Avery</p>
+          <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">
+            Family Archivist & Team Captain
           </p>
-          <p className="text-sm text-muted mt-1">Family Archivist & Team Captain</p>
         </div>
       </div>
     </section>

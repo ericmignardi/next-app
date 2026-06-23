@@ -34,6 +34,9 @@ model Video {
   muxAssetId    String      @unique
   muxPlaybackId String      @unique
   
+  // New field: video duration in seconds
+  duration      Float?      // captured from Mux webhook
+
   userId        String      
   user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   highlights    Highlight[]

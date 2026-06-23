@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, Trash2, Loader2 } from "lucide-react";
 import { videoFormSchema, VideoFormValues } from "@/types/video";
 import { initializeVideoUpload } from "@/actions/actions";
+import { toast } from "sonner";
 import axiosInstance from "@/lib/axios";
 
 import { Button } from "@/components/ui/button";
@@ -37,7 +38,7 @@ export function UploadForm({ onSuccess }: { onSuccess: () => void }) {
   });
 
   const onSubmit = async (values: VideoFormValues) => {
-    if (!file) return alert("Please select a video file first");
+    if (!file) return toast.error("Please select a video file first");
     setIsUploading(true);
 
     try {
@@ -73,13 +74,11 @@ export function UploadForm({ onSuccess }: { onSuccess: () => void }) {
       setFile(null);
       form.reset();
       onSuccess();
-      alert(
-        "Video upload running in background! It will appear on your dashboard shortly.",
-      );
+      toast.success("Video upload started! It will appear on your dashboard shortly.");
     } catch (err) {
       console.error("Upload process caught an exception:", err);
       setIsUploading(false);
-      alert("Something went wrong during file processing.");
+      toast.error("Something went wrong during file processing.");
     }
   };
 

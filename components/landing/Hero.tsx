@@ -1,47 +1,54 @@
 import Link from "next/link";
-import { PlayCircle } from "lucide-react";
+import { ShieldCheck, Play } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="max-w-250 mx-auto px-8 pt-24 pb-14 text-center flex flex-col items-center">
-      {/* Archive Preserve Banner */}
-      <div className="inline-flex items-center gap-2 bg-card border border-muted/20 rounded-full px-3.5 py-1.5 text-[13px] font-medium text-secondary shadow-[0_1px_2px_rgba(15,23,42,0.04)] select-none">
-        <span className="inline-flex items-center gap-1.5 bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full font-semibold text-[12px]">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>
-          VHS to HLS
-        </span>
-        Preserving family sports history in full HD
+    <section className="relative min-h-[90vh] flex items-center justify-center text-center bg-[#070a13] py-20 px-6 overflow-hidden">
+      {/* Decorative gradient overlay */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none z-0">
+        <div className="absolute top-[-10%] left-[10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[10%] w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-[120px]" />
       </div>
 
-      {/* Title */}
-      <h1 className="text-[40px] sm:text-[56px] md:text-[64px] font-extrabold leading-[1.05] tracking-[-0.03em] text-foreground mt-7 max-w-220 mx-auto">
-        Preserve and stream your
-        <br className="hidden sm:inline" />
-        family&apos;s sports legacy
-      </h1>
+      <div className="relative z-10 max-w-4xl mx-auto space-y-8 flex flex-col items-center">
+        {/* VHS to HLS Badge */}
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-bold text-blue-400 tracking-wide">
+          <span className="bg-blue-500 text-[#070a13] text-[9px] px-1.5 py-0.5 rounded font-black mr-1 uppercase">
+            VHS to HLS
+          </span>
+          <span>Preserving family sports history</span>
+        </div>
 
-      {/* Description */}
-      <p className="text-[17px] sm:text-xl leading-[1.55] text-muted mt-6 max-w-170 mx-auto">
-        LockerRoom securely hosts, indexes, and streams your digitized home sports footage in high-fidelity HLS. Jump straight to the action with interactive timestamp highlights.
-      </p>
+        {/* Title / Heading */}
+        <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
+          Your Family&apos;s <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500">Sports Legacy</span>, Pinned & Streaming.
+        </h1>
 
-      {/* CTA Buttons */}
-      <div className="flex flex-col sm:flex-row gap-3.5 justify-center mt-9 w-full sm:w-auto">
-        <Link href="/sign-up" className="w-full sm:w-auto">
-          <button className="btn-brand-primary w-full shadow-lg shadow-primary/20">Explore the Vault</button>
-        </Link>
-        <Link href="/sign-in" className="w-full sm:w-auto">
-          <button className="btn-brand-secondary w-full sm:w-auto flex items-center justify-center gap-2">
-            <PlayCircle className="size-5" />
-            Watch Highlights
-          </button>
-        </Link>
+        {/* Description */}
+        <p className="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed">
+          LockerRoom securely hosts, indexes, and streams your historical home recordings. Convert analog footage into interactive video assets with ease.
+        </p>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link href="/sign-up">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg shadow-blue-500/10 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer flex items-center gap-2">
+              Explore the Vault
+            </button>
+          </Link>
+          <Link href="#pricing">
+            <button className="bg-[#111726] hover:bg-[#182238] text-white border border-slate-800 hover:border-slate-700 font-bold px-8 py-4 rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer flex items-center gap-2">
+              <Play className="w-4 h-4 fill-white" /> Watch Highlights
+            </button>
+          </Link>
+        </div>
+
+        {/* Strictly Private badge */}
+        <div className="flex items-center gap-2 text-slate-500 text-xs select-none">
+          <ShieldCheck className="w-4 h-4 text-emerald-500" />
+          <span>Strictly private access. Guest login required.</span>
+        </div>
       </div>
-
-      {/* Trial info */}
-      <p className="text-[13px] text-muted/80 mt-4.5">
-        Strictly private · Family guest access codes available
-      </p>
     </section>
   );
 }
