@@ -1,4 +1,4 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher, clerkClient } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
@@ -17,7 +17,11 @@ export default clerkMiddleware(async (auth, req) => {
     // If the user is logged in, perform the admin check.
     // Otherwise, allow the request to fall through to auth.protect() below.
     if (session.userId) {
-      const isAdmin = session.sessionClaims?.metadata?.isAdmin === true;
+      const client = await clerkClient();
+      const user = await client.users.getUser(session.userId);
+      const isAdmin =
+        session.sessionClaims?.metadata?.isAdmin === true ||
+        user.publicMetadata?.isAdmin === true;
       if (!isAdmin) {
         // If a guest logs in and tries to access /admin, redirect them to the dashboard
         return NextResponse.redirect(new URL("/dashboard", req.url));
