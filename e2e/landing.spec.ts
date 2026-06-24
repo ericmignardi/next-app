@@ -5,65 +5,60 @@ test.describe("Landing Page", () => {
     test("renders the hero heading, description, and CTAs", async ({ page }) => {
       await page.goto("/");
 
-      // On an unauthenticated app, this may redirect to sign-in.
-      // If the landing page is public, these assertions will work.
-      // If it redirects, this test suite gracefully focuses on the auth pages.
-      const url = page.url();
+      // Verify page title/heading
+      await expect(
+        page.getByRole("heading", { name: "Your family's sporting legacy," }),
+      ).toBeVisible();
 
-      // If we were redirected to sign-in, verify the sign-in branding instead
-      if (url.includes("sign-in")) {
-        // The app redirects unauthenticated users — verify branding is present
-        await expect(page.getByRole("heading", { name: "Welcome back" })).toBeVisible();
-        await expect(page.getByText("Locker")).toBeVisible();
-      }
+      // Verify private vault badge
+      await expect(page.getByText("Invitation-Only Family Sports Archive")).toBeVisible();
+
+      // Verify description
+      await expect(
+        page.getByText("LockerRoom digitizes, indexes, and streams your historical sports footage."),
+      ).toBeVisible();
+
+      // Verify CTAs
+      await expect(page.getByRole("link", { name: "Access the Vault" })).toBeVisible();
+      await expect(page.getByRole("link", { name: "Register New Account" })).toBeVisible();
     });
   });
 
   test.describe("Auth Page Branding", () => {
-    test("sign-in page shows LockerRoom branding and testimonial", async ({ page }) => {
+    test("sign-in page shows LockerRoom branding and portal info", async ({ page }) => {
       await page.goto("/sign-in");
 
-      // Locker logo/brand text should appear in the left pane
+      // Locker logo/brand text should appear
       const lockerTexts = page.getByText("Locker");
       await expect(lockerTexts.first()).toBeVisible();
 
-      // Star rating should appear in the testimonial
-      await expect(page.getByText("★★★★★")).toBeVisible();
+      // Header is "Access the Vault"
+      await expect(page.getByRole("heading", { name: "Access the Vault" })).toBeVisible();
 
-      // Testimonial quote
-      await expect(
-        page.getByText("The easiest way to share digitized camcorder tapes"),
-      ).toBeVisible();
-
-      // Testimonial author
-      await expect(page.getByText("Sam Rivera")).toBeVisible();
-      await expect(page.getByText("Coach & Family Captain")).toBeVisible();
+      // Subtitle info
+      await expect(page.getByText("Sign in to view your family archives")).toBeVisible();
     });
 
-    test("sign-up page shows LockerRoom branding and feature list", async ({ page }) => {
+    test("sign-up page shows LockerRoom branding and request access info", async ({ page }) => {
       await page.goto("/sign-up");
 
       // Locker logo should be present
       const lockerTexts = page.getByText("Locker");
       await expect(lockerTexts.first()).toBeVisible();
 
-      // Feature highlights in the left pane
-      await expect(
-        page.getByText("Start archiving your family sports legacy."),
-      ).toBeVisible();
-      await expect(page.getByText("100% Private, guest code security")).toBeVisible();
-      await expect(page.getByText("Adaptive HLS buffer-free streaming")).toBeVisible();
-      await expect(page.getByText("Interactive timeline highlight seekers")).toBeVisible();
+      // Header is "Register Account"
+      await expect(page.getByRole("heading", { name: "Register Account" })).toBeVisible();
+
+      // Subtitle info
+      await expect(page.getByText("Request access to your family sports vault")).toBeVisible();
     });
 
-    test("both auth pages show copyright", async ({ page }) => {
+    test("landing page shows copyright in footer", async ({ page }) => {
       const currentYear = new Date().getFullYear().toString();
 
-      await page.goto("/sign-in");
-      await expect(page.getByText(new RegExp(`© ${currentYear} LockerRoom Inc`))).toBeVisible();
-
-      await page.goto("/sign-up");
-      await expect(page.getByText(new RegExp(`© ${currentYear} LockerRoom Inc`))).toBeVisible();
+      await page.goto("/");
+      await expect(page.getByText(new RegExp(`© ${currentYear} LockerRoom`))).toBeVisible();
     });
   });
 });
+
