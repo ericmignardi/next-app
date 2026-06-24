@@ -1,8 +1,12 @@
 import Link from "next/link";
 
-export default function Header() {
+interface HeaderProps {
+  userId?: string | null;
+}
+
+export default function Header({ userId }: HeaderProps) {
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-[#070a13]/70 backdrop-blur-md border-b border-slate-900/80 transition-all duration-300">
+    <header className="fixed top-0 left-0 w-full z-50 bg-[#070a13]/40 backdrop-blur-md border-b border-white/[0.03] transition-all duration-300">
       <nav className="max-w-7xl mx-auto flex items-center justify-between p-4 px-6 sm:px-8">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2 group select-none">
@@ -12,40 +16,35 @@ export default function Header() {
             </svg>
           </div>
           <span className="font-bold text-[19px] tracking-tight text-white">
-            <span>Locker</span><span className="text-blue-500">Room</span>
+            <span>Locker</span><span className="text-blue-500 font-medium">Room</span>
           </span>
         </Link>
 
-        {/* Navigation Links */}
-        <div className="hidden md:flex items-center gap-8">
-          <Link href="#features" className="text-sm font-semibold text-slate-300 hover:text-white transition-colors">
-            Features
-          </Link>
-          <Link href="#pricing" className="text-sm font-semibold text-slate-300 hover:text-white transition-colors">
-            Pricing
-          </Link>
-          <Link href="#docs" className="text-sm font-semibold text-slate-300 hover:text-white transition-colors">
-            Docs
-          </Link>
-          <Link href="#customers" className="text-sm font-semibold text-slate-300 hover:text-white transition-colors">
-            Customers
-          </Link>
-        </div>
-
-        {/* Auth CTA Buttons */}
+        {/* Minimal Auth Actions */}
         <div className="flex items-center gap-4">
-          <Link
-            href="/sign-in"
-            className="text-sm font-semibold text-slate-300 hover:text-white transition-colors px-3 py-1.5"
-          >
-            Sign in
-          </Link>
-          <Link
-            href="/sign-up"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-blue-500/10 transition-all hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Get started
-          </Link>
+          {userId ? (
+            <Link
+              href="/dashboard"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-lg shadow-blue-500/10 transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Enter Vault
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/sign-in"
+                className="text-xs font-bold text-slate-300 hover:text-white transition-colors px-3 py-2"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/sign-up"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-blue-500/10 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Register Vault
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>

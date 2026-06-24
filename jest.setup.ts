@@ -76,3 +76,12 @@ jest.mock('@mux/mux-player-react', () => {
     default: MuxPlayer,
   };
 });
+
+// ---------------------------------------------------------------------------
+// Global mock: @clerk/nextjs/server
+// ---------------------------------------------------------------------------
+jest.mock('@clerk/nextjs/server', () => {
+  return {
+    auth: jest.fn().mockResolvedValue({ userId: null }),
+  };
+});

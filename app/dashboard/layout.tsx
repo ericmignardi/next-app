@@ -13,8 +13,8 @@ export default function DashboardLayout({
   return (
     <div className="min-h-screen bg-[#070a13] text-slate-100 flex flex-col sm:flex-row antialiased">
       {/* Sidebar Navigation */}
-      <aside className="w-full sm:w-64 border-b sm:border-b-0 sm:border-r border-slate-900 bg-[#090d19] flex flex-col justify-between shrink-0 z-30">
-        <div className="p-5 space-y-7">
+      <aside className="w-full sm:w-64 border-b sm:border-b-0 sm:border-r border-white/[0.03] bg-[#090d19]/80 backdrop-blur-md flex flex-col justify-between shrink-0 z-30">
+        <div className="p-6 space-y-8">
           {/* Brand Logo */}
           <Link
             href="/dashboard"
@@ -26,7 +26,7 @@ export default function DashboardLayout({
               </svg>
             </div>
             <span className="font-bold text-[19px] tracking-tight text-white">
-              Locker<span className="text-blue-500">Room</span>
+              Locker<span className="text-blue-500 font-medium">Room</span>
             </span>
           </Link>
 
@@ -38,41 +38,41 @@ export default function DashboardLayout({
               </span>
               <Link
                 href="/dashboard"
-                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-350 hover:text-white hover:bg-white/[0.03] transition-all duration-200"
               >
                 <LayoutGrid className="w-4 h-4 text-blue-500" />
                 <span>All Archives</span>
               </Link>
               <Link
                 href="/dashboard?sport=hockey"
-                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-350 hover:text-white hover:bg-white/[0.03] transition-all duration-200"
               >
                 <Trophy className="w-4 h-4 text-blue-500" />
                 <span>Hockey Vault</span>
               </Link>
               <Link
                 href="/dashboard?sport=baseball"
-                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-350 hover:text-white hover:bg-white/[0.03] transition-all duration-200"
               >
                 <Compass className="w-4 h-4 text-blue-500" />
                 <span>Baseball Diamonds</span>
               </Link>
             </div>
 
-            <div className="space-y-1 pt-2 border-t border-slate-900">
+            <div className="space-y-1 pt-4 border-t border-white/[0.03]">
               <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest px-2 block mb-2 select-none">
                 Control Panel
               </span>
               <Link
                 href="/admin"
-                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-350 hover:text-white hover:bg-white/[0.03] transition-all duration-200"
               >
                 <Shield className="w-4 h-4 text-amber-500" />
                 <span>Admin Workspace</span>
               </Link>
               <Link
                 href="/"
-                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/30 transition-all duration-200"
+                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-white/[0.03] transition-all duration-200"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Landing Page</span>
@@ -82,9 +82,9 @@ export default function DashboardLayout({
         </div>
 
         {/* User Account Bar */}
-        <div className="p-4 border-t border-slate-900 bg-[#060a14] flex items-center justify-between">
+        <div className="p-4 border-t border-white/[0.03] bg-[#060a14]/60 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center p-0.5 rounded-full border border-slate-800">
+            <div className="flex items-center justify-center p-0.5 rounded-full border border-white/[0.04]">
               <UserButton
                 appearance={{
                   elements: {
@@ -98,7 +98,7 @@ export default function DashboardLayout({
               <span className="text-[9px] text-slate-500 font-semibold tracking-wide uppercase mt-0.5 block">Viewer Account</span>
             </div>
           </div>
-          <div className="text-xs opacity-60">🔒</div>
+          <div className="text-xs opacity-40">🔒</div>
         </div>
       </aside>
 

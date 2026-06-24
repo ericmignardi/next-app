@@ -18,12 +18,12 @@ export function MediaRow({ title, description, videos }: MediaRowProps) {
 
   return (
     <div className="space-y-3 py-4">
-      <div>
-        <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+      <div className="select-none">
+        <h2 className="text-lg sm:text-xl font-extrabold text-white tracking-tight">
           {title}
         </h2>
         {description && (
-          <p className="text-xs text-slate-400 font-medium">{description}</p>
+          <p className="text-[11px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">{description}</p>
         )}
       </div>
 

@@ -58,18 +58,17 @@ export function VideoPlayerShell({
       />
 
       {/* Under-Player Interactive Highlights Panel */}
-      <div className="bg-[#090d19] border-t border-slate-900 p-6 space-y-3.5">
-        <div className="flex items-center gap-2.5 text-white">
+      <div className="bg-[#090d19]/90 border-t border-white/[0.03] p-6 space-y-4">
+        <div className="flex items-center gap-2.5 text-white select-none">
           <Trophy className="w-4 h-4 text-amber-500 fill-amber-500/10" />
-          <h2 className="text-sm font-bold tracking-wider uppercase select-none">
+          <h2 className="text-[11px] font-bold tracking-wider uppercase">
             Game Index & Highlight Markers
           </h2>
         </div>
 
         {highlights.length === 0 ? (
           <p className="text-xs text-slate-500 font-medium italic">
-            No interactive timeline highlight tags were pinned to this video
-            asset.
+            No interactive timeline highlight tags were pinned to this video asset.
           </p>
         ) : (
           <div className="flex flex-wrap gap-2.5 pt-1">
@@ -77,12 +76,12 @@ export function VideoPlayerShell({
               <button
                 key={marker.id}
                 onClick={() => handleSeekToHighlight(marker.timestamp)}
-                className="inline-flex items-center gap-2.5 text-left bg-[#111726] hover:bg-[#182238] border border-slate-800/80 hover:border-blue-900/60 px-3.5 py-2 rounded-xl transition-all duration-200 group cursor-pointer active:scale-[0.98]"
+                className="inline-flex items-center gap-2.5 text-left bg-slate-950 hover:bg-[#111726] border border-white/[0.03] hover:border-blue-900/60 px-3.5 py-2 rounded-xl transition-all duration-200 group cursor-pointer active:scale-[0.98]"
               >
-                <span className="text-[10px] font-mono font-bold text-blue-400 bg-blue-500/10 group-hover:bg-blue-500/20 px-2 py-0.5 rounded border border-blue-500/20 shadow-sm">
+                <span className="text-[9px] font-mono font-bold text-blue-400 bg-blue-500/5 group-hover:bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/10 shadow-sm">
                   {marker.timestamp}
                 </span>
-                <span className="text-xs font-semibold text-slate-300 group-hover:text-white transition-colors">
+                <span className="text-xs font-semibold text-slate-350 group-hover:text-white transition-colors">
                   {marker.label}
                 </span>
               </button>

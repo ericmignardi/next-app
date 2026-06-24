@@ -59,10 +59,12 @@ export async function deleteVideo(id: string, muxAssetId: string) {
   if (!userId) throw new Error("Unauthorized");
 
   try {
-    // Remove master asset files from Mux video cloud storage
-    // If the video was still pendin, the assetId might be a temporary placeholder, so wrap it in a guard
-    if (muxAssetId && !muxAssetId.startsWith("pending_")) {
-      await mux.video.assets.delete(muxAssetId);
+    if (muxAssetId) {
+      if (muxAssetId.startsWith("upl_")) {
+        await mux.video.uploads.cancel(muxAssetId).catch(() => {});
+      } else if (!muxAssetId.startsWith("pending_")) {
+        await mux.video.assets.delete(muxAssetId);
+      }
     }
   } catch (error) {
     console.error("Mux cloud asset deletion failed or asset missing: ", error);
@@ -75,6 +77,49 @@ export async function deleteVideo(id: string, muxAssetId: string) {
   });
 
   revalidatePath("/admin");
+  revalidatePath("/dashboard");
+}
+
+export async function updateVideo(
+  id: string,
+  values: Omit<VideoFormValues, "highlights"> & {
+    highlights: { timestamp: string; label: string }[];
+  },
+) {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorized");
+
+  const dbUser = await prisma.user.findUnique({
+    where: { clerkId: userId },
+  });
+  if (!dbUser) throw new Error("User record mismatch in application database");
+
+  await prisma.$transaction([
+    prisma.highlight.deleteMany({
+      where: { videoId: id },
+    }),
+    prisma.video.update({
+      where: { id },
+      data: {
+        title: values.title,
+        description: values.description,
+        sport: values.sport,
+        year: values.year,
+        team: values.team,
+        gameType: values.gameType,
+        jerseyNumber: values.jerseyNumber,
+        highlights: {
+          createMany: {
+            data: values.highlights,
+          },
+        },
+      },
+    }),
+  ]);
+
+  revalidatePath("/admin");
+  revalidatePath("/dashboard");
+  revalidatePath(`/watch/${id}`);
 }
 
 export async function refreshAdmin() {

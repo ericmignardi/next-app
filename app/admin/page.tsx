@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { DataTable } from "@/components/admin/data-table";
 
-export const revalidate = 0; // Absolute dynamic serving to bypass cache lags
+export const unstable_instant = false;
 
 export default async function AdminPage() {
   const { userId } = await auth();
