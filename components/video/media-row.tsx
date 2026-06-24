@@ -1,4 +1,4 @@
-import { VideoCard } from "./video-card";
+import { VideoCard } from "@/components/video/video-card";
 
 interface MediaRowProps {
   title: string;
