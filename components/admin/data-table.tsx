@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import { type VideoModel as Video } from '@/generated/prisma/models';
 import { useReactTable, getCoreRowModel, getFilteredRowModel, getSortedRowModel, getPaginationRowModel, flexRender } from '@tanstack/react-table';
