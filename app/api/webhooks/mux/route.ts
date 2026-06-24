@@ -1,12 +1,36 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { mux } from "@/lib/mux";
 
 export async function POST(req: NextRequest) {
   try {
-    const jsonBody = await req.json();
+    // 1. Retrieve raw body text and webhook signature for verification
+    const body = await req.text();
+    const signature = req.headers.get("mux-signature");
+
+    if (!signature) {
+      return new NextResponse("Missing Mux signature header", { status: 400 });
+    }
+
+    const webhookSecret = process.env.MUX_WEBHOOK_SECRET;
+    if (!webhookSecret) {
+      console.error("Missing MUX_WEBHOOK_SECRET environment variable");
+      return new NextResponse("Webhook configuration error", { status: 500 });
+    }
+
+    // 2. Verify signature (will throw an error if verification fails)
+    try {
+      mux.webhooks.verifySignature(body, signature, webhookSecret);
+    } catch (verifyErr) {
+      console.error("Mux webhook signature verification failed:", verifyErr);
+      return new NextResponse("Invalid signature", { status: 400 });
+    }
+
+    // 3. Parse verified JSON body payload
+    const jsonBody = JSON.parse(body);
     const { type, data } = jsonBody;
 
-    // 1. Listen for the asset readable/ready event
+    // 4. Listen for the asset readable/ready event
     if (type === "video.asset.ready") {
       const muxAssetId = data.id;
       const muxPlaybackId = data.playback_ids?.[0]?.id;
@@ -16,7 +40,7 @@ export async function POST(req: NextRequest) {
         return new NextResponse("No active playback ID found", { status: 400 });
       }
 
-      // 2. Locate the video record matching this upload session and attach the permanent asset links
+      // 5. Locate the video record matching this upload session and attach the permanent asset links
       await prisma.video.updateMany({
         where: {
           muxAssetId: uploadId, // During creation, we will temporarily save the uploadId here to map it
@@ -37,3 +61,4 @@ export async function POST(req: NextRequest) {
     return new NextResponse("Webhook Handler Error", { status: 500 });
   }
 }
+
