@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
     // 2. Verify signature (will throw an error if verification fails)
     try {
-      mux.webhooks.verifySignature(body, signature, webhookSecret);
+      await mux.webhooks.verifySignature(body, req.headers, webhookSecret);
     } catch (verifyErr) {
       console.error("Mux webhook signature verification failed:", verifyErr);
       return new NextResponse("Invalid signature", { status: 400 });
