@@ -51,7 +51,7 @@ describe("VideoPlayerShell", () => {
     );
 
     const player = screen.getByTestId("mux-player") as HTMLVideoElement;
-    player.play = jest.fn().mockResolvedValue(undefined);
+    player.play = vi.fn().mockResolvedValue(undefined);
 
     const firstButton = screen.getAllByRole("button")[0];
     fireEvent.click(firstButton);

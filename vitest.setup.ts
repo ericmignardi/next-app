@@ -1,10 +1,11 @@
 import '@testing-library/jest-dom';
 import React from 'react';
+import { vi } from 'vitest';
 
 // ---------------------------------------------------------------------------
 // Global mock: @clerk/nextjs
 // ---------------------------------------------------------------------------
-jest.mock('@clerk/nextjs', () => {
+vi.mock('@clerk/nextjs', () => {
   return {
     ClerkProvider: ({ children }: { children: React.ReactNode }) => children,
     Show: ({ when, children }: { when: string; children: React.ReactNode }) => {
@@ -19,20 +20,20 @@ jest.mock('@clerk/nextjs', () => {
     SignUpButton: ({ children }: { children: React.ReactNode }) => children,
     useSignIn: () => ({
       signIn: {
-        password: jest.fn(),
-        sso: jest.fn(),
-        finalize: jest.fn(),
+        password: vi.fn(),
+        sso: vi.fn(),
+        finalize: vi.fn(),
         status: 'needs_identifier',
       },
     }),
     useSignUp: () => ({
       signUp: {
-        password: jest.fn(),
+        password: vi.fn(),
         verifications: {
-          sendEmailCode: jest.fn(),
-          verifyEmailCode: jest.fn(),
+          sendEmailCode: vi.fn(),
+          verifyEmailCode: vi.fn(),
         },
-        finalize: jest.fn(),
+        finalize: vi.fn(),
         status: 'needs_verification',
       },
     }),
@@ -42,25 +43,25 @@ jest.mock('@clerk/nextjs', () => {
 // ---------------------------------------------------------------------------
 // Global mock: next/navigation
 // ---------------------------------------------------------------------------
-jest.mock('next/navigation', () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
-    push: jest.fn(),
-    replace: jest.fn(),
-    prefetch: jest.fn(),
-    back: jest.fn(),
-    forward: jest.fn(),
-    refresh: jest.fn(),
+    push: vi.fn(),
+    replace: vi.fn(),
+    prefetch: vi.fn(),
+    back: vi.fn(),
+    forward: vi.fn(),
+    refresh: vi.fn(),
   }),
   usePathname: () => '/',
   useSearchParams: () => new URLSearchParams(),
-  redirect: jest.fn(),
-  notFound: jest.fn(),
+  redirect: vi.fn(),
+  notFound: vi.fn(),
 }));
 
 // ---------------------------------------------------------------------------
 // Global mock: @mux/mux-player-react
 // ---------------------------------------------------------------------------
-jest.mock('@mux/mux-player-react', () => {
+vi.mock('@mux/mux-player-react', () => {
   const MuxPlayer = React.forwardRef(
     (props: Record<string, unknown>, ref: React.Ref<HTMLVideoElement>) =>
       React.createElement('video', {
@@ -80,16 +81,16 @@ jest.mock('@mux/mux-player-react', () => {
 // ---------------------------------------------------------------------------
 // Global mock: @clerk/nextjs/server
 // ---------------------------------------------------------------------------
-jest.mock('@clerk/nextjs/server', () => {
+vi.mock('@clerk/nextjs/server', () => {
   return {
-    auth: jest.fn().mockResolvedValue({ userId: null }),
+    auth: vi.fn().mockResolvedValue({ userId: null }),
   };
 });
 
 // ---------------------------------------------------------------------------
 // Global mock: next/image
 // ---------------------------------------------------------------------------
-jest.mock('next/image', () => {
+vi.mock('next/image', () => {
   return {
     __esModule: true,
     default: ({ fill, priority, sizes, ...props }: Record<string, unknown>) => {

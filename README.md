@@ -58,7 +58,7 @@ Open http://localhost:3000 in your browser.
 - `npm run build` – Production build
 - `npm run start` – Run production build locally
 - `npm run lint` – Lint with ESLint
-- `npm run test` – Run Jest unit tests
+- `npm run test` – Run Vitest unit/component/integration tests
 - `npm run test:e2e` – Run Playwright end‑to‑end tests
 
 ## Directory Structure
@@ -84,7 +84,7 @@ styles/             # Global CSS (tailwind config)
 3. Vercel will run `npm run build` and deploy automatically.
 
 ## Testing
-- **Unit tests** are located in `__tests__/` and run with Jest.
+- **Unit/Component/Integration tests** are located in `__tests__/` and run with Vitest.
 - **E2E tests** are in `e2e/` and run with Playwright.
 
 ## Troubleshooting

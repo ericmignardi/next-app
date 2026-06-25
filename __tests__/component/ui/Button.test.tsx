@@ -10,7 +10,7 @@ describe("Button", () => {
 
   it("calls onClick when clicked", async () => {
     const user = userEvent.setup();
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(<Button onClick={handleClick}>Click</Button>);
 
     await user.click(screen.getByRole("button", { name: "Click" }));
@@ -19,7 +19,7 @@ describe("Button", () => {
 
   it("does not fire onClick when disabled", async () => {
     const user = userEvent.setup();
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
     render(
       <Button disabled onClick={handleClick}>
         Disabled

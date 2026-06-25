@@ -30,7 +30,7 @@ describe("Input", () => {
 
   it("calls onChange handler", async () => {
     const user = userEvent.setup();
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<Input onChange={handleChange} />);
 
     await user.type(screen.getByRole("textbox"), "hello");
