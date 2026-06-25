@@ -4,18 +4,28 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Play, Search } from "lucide-react";
 import Image from "next/image";
+import { Suspense } from "react";
+
+export const unstable_instant = {
+  prefetch: "static",
+  samples: [
+    {
+      searchParams: {
+        sport: null,
+        q: null,
+      },
+    },
+  ],
+};
 
 interface PageProps {
   searchParams?: Promise<{ sport?: string; q?: string }>;
 }
 
-export default async function DashboardPage({ searchParams }: PageProps) {
-  const resolvedSearchParams = searchParams ? await searchParams : {};
-  const selectedSport = resolvedSearchParams.sport;
-  const searchQuery = resolvedSearchParams.q;
-
-  // Fetch all completed, stream-ready video records
-  const allVideos = await prisma.video.findMany({
+// Cached function to fetch completed, stream-ready video records
+async function getVideos() {
+  "use cache";
+  return prisma.video.findMany({
     where: {
       NOT: {
         muxPlaybackId: { startsWith: "pending_" },
@@ -23,6 +33,69 @@ export default async function DashboardPage({ searchParams }: PageProps) {
     },
     orderBy: { createdAt: "desc" },
   });
+}
+
+export default function DashboardPage({ searchParams }: PageProps) {
+  return (
+    <Suspense fallback={<DashboardSkeleton />}>
+      <DashboardContent searchParams={searchParams} />
+    </Suspense>
+  );
+}
+
+function DashboardSkeleton() {
+  return (
+    <div className="bg-transparent min-h-screen pb-16 animate-pulse">
+      {/* Top Navigation & Search Bar Skeleton */}
+      <header className="h-16 px-6 max-w-7xl mx-auto flex items-center justify-between border-b border-white/[0.02] bg-transparent backdrop-blur-sm sticky top-0 z-20 gap-4 mb-6">
+        <div className="h-4 w-32 bg-slate-800 rounded" />
+        <div className="w-full max-w-xs sm:max-w-sm h-8 bg-slate-800/60 rounded-xl" />
+      </header>
+
+      {/* Hero Banner Skeleton */}
+      <div className="px-6 max-w-7xl mx-auto">
+        <div className="relative aspect-[21/9] w-full bg-slate-950 rounded-2xl border border-white/[0.02] flex items-end p-6 sm:p-10">
+          <div className="space-y-3 w-full max-w-xl">
+            <div className="h-4 w-28 bg-slate-800 rounded" />
+            <div className="h-8 w-3/4 bg-slate-800 rounded" />
+            <div className="h-4 w-5/6 bg-slate-800 rounded" />
+            <div className="h-10 w-32 bg-slate-800 rounded-xl pt-2" />
+          </div>
+        </div>
+      </div>
+
+      {/* Rows Skeleton */}
+      <main className="max-w-7xl mx-auto px-6 mt-8 space-y-8">
+        {[1, 2].map((i) => (
+          <div key={i} className="space-y-4 py-4">
+            <div className="space-y-2">
+              <div className="h-5 w-40 bg-slate-800 rounded" />
+              <div className="h-3 w-60 bg-slate-800/60 rounded" />
+            </div>
+            <div className="flex gap-5 overflow-hidden">
+              {[1, 2, 3].map((j) => (
+                <div key={j} className="space-y-3 shrink-0 w-[280px] sm:w-[320px]">
+                  <div className="relative aspect-video rounded-xl bg-slate-950 border border-white/[0.04]" />
+                  <div className="space-y-2">
+                    <div className="h-4 w-3/4 bg-slate-800 rounded" />
+                    <div className="h-3 w-1/2 bg-slate-800/60 rounded" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </main>
+    </div>
+  );
+}
+
+async function DashboardContent({ searchParams }: PageProps) {
+  const resolvedSearchParams = searchParams ? await searchParams : {};
+  const selectedSport = resolvedSearchParams.sport;
+  const searchQuery = resolvedSearchParams.q;
+
+  const allVideos = await getVideos();
 
   // Filter video list based on sidebar selection & search query
   let filteredVideos = allVideos;

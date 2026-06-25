@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { mux } from "@/lib/mux";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: NextRequest) {
   try {
@@ -51,6 +52,9 @@ export async function POST(req: NextRequest) {
           duration: data.duration ?? null,
         },
       });
+
+      revalidatePath("/admin");
+      revalidatePath("/dashboard");
 
       return NextResponse.json({ received: true }, { status: 200 });
     }

@@ -37,6 +37,7 @@ export async function bulkDeleteVideos(ids: string[]) {
     }),
   ]);
 
-  // Revalidate admin page after deletion
+  // Revalidate admin and dashboard pages after deletion
   revalidatePath('/admin');
+  revalidatePath('/dashboard');
 }

@@ -72,34 +72,44 @@ function WatchSkeleton() {
   );
 }
 
-async function WatchContent({ id }: { id: string }) {
-  // 1. Query the database for the exact asset matching the URL segment
-  const video = await prisma.video.findUnique({
+async function getVideo(id: string) {
+  "use cache";
+  return prisma.video.findUnique({
     where: { id },
     include: {
       highlights: {
         orderBy: {
-          timestamp: "asc", // Order timestamps sequentially from start to finish
+          timestamp: "asc",
         },
       },
     },
   });
+}
 
-  if (!video) {
-    notFound();
-  }
-
-  // 2. Fetch other recommendations for the right-hand column sidebar
-  const otherVideos = await prisma.video.findMany({
+async function getRecommendedVideos(excludeId: string) {
+  "use cache";
+  return prisma.video.findMany({
     where: {
       NOT: {
-        id: video.id,
+        id: excludeId,
         muxPlaybackId: { startsWith: "pending_" },
       },
     },
     take: 4,
     orderBy: { createdAt: "desc" },
   });
+}
+
+async function WatchContent({ id }: { id: string }) {
+  // 1. Query the database for the exact asset matching the URL segment using cached helper
+  const video = await getVideo(id);
+
+  if (!video) {
+    notFound();
+  }
+
+  // 2. Fetch other recommendations using cached helper
+  const otherVideos = await getRecommendedVideos(video.id);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
