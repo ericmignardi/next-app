@@ -1,10 +1,9 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { Trash2, Film, Plus, Shield, ArrowLeft } from "lucide-react";
-import { deleteVideo, refreshAdmin } from "@/actions/actions";
+import { Plus, Shield, ArrowLeft } from "lucide-react";
+import { refreshAdmin } from "@/actions/actions";
 import { UploadForm } from "@/components/admin/upload-form";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { DataTable } from "@/components/admin/data-table";
@@ -13,6 +12,9 @@ export const unstable_instant = false;
 
 export default async function AdminPage() {
   const { userId } = await auth();
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
 
   // Pull existing videos sorted by date
   const videos = await prisma.video.findMany({

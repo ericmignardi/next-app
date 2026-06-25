@@ -49,7 +49,7 @@ export function DataTable({ videos }: DataTableProps) {
       setSelectedIds([]);
       // Refresh to fetch updated list
       window.location.reload();
-    } catch (e) {
+    } catch {
       toast.error('Failed to delete videos');
     }
   };

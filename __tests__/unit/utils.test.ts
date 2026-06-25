@@ -220,13 +220,15 @@ describe("videoFormSchema", () => {
   });
 
   it("accepts data without optional description", () => {
-    const { description, ...rest } = validVideo;
+    const rest = { ...validVideo };
+    delete (rest as Partial<typeof validVideo>).description;
     const result = videoFormSchema.safeParse(rest);
     expect(result.success).toBe(true);
   });
 
   it("accepts data without highlights (defaults to empty array)", () => {
-    const { highlights, ...rest } = validVideo;
+    const rest = { ...validVideo };
+    delete (rest as Partial<typeof validVideo>).highlights;
     const result = videoFormSchema.safeParse(rest);
     expect(result.success).toBe(true);
     if (result.success) {

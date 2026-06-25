@@ -2,7 +2,8 @@ import prisma from "@/lib/prisma";
 import { MediaRow } from "@/components/video/media-row";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Play, Search, Video } from "lucide-react";
+import { Play, Search } from "lucide-react";
+import Image from "next/image";
 
 interface PageProps {
   searchParams?: Promise<{ sport?: string; q?: string }>;
@@ -89,11 +90,13 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         <div className="px-6 max-w-7xl mx-auto">
           <div className="relative aspect-[21/9] w-full bg-slate-950 rounded-2xl overflow-hidden shadow-2xl border border-white/[0.02]">
             {/* Displaying an ultra widescreen poster image overlay natively mapped from Mux asset endpoints */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={`https://image.mux.com/${featuredVideo.muxPlaybackId}/thumbnail.webp?time=5&width=1200`}
               alt={featuredVideo.title}
               className="object-cover w-full h-full opacity-50 blur-[0.3px]"
+              fill
+              priority
+              sizes="(max-width: 1200px) 100vw, 1200px"
             />
             {/* Dark gradient fade for text legibility */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#070a13] via-[#070a13]/20 to-transparent" />

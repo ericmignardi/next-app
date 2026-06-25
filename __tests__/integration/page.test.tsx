@@ -1,9 +1,10 @@
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import Page from "@/app/page";
 
 describe("Landing Page Integration", () => {
   it("renders the hero heading and description", async () => {
-    const resolvedPage = await (Page as any)();
+    const resolvedPage = await (Page as unknown as () => Promise<React.ReactElement>)();
     render(resolvedPage);
 
     const heroHeading = screen.getByRole("heading", { level: 1 });
@@ -15,7 +16,7 @@ describe("Landing Page Integration", () => {
   });
 
   it('renders access button linked to /sign-in', async () => {
-    const resolvedPage = await (Page as any)();
+    const resolvedPage = await (Page as unknown as () => Promise<React.ReactElement>)();
     render(resolvedPage);
 
     const accessButton = screen.getByRole("button", {
@@ -30,7 +31,7 @@ describe("Landing Page Integration", () => {
   });
 
   it('renders register button linked to /sign-up', async () => {
-    const resolvedPage = await (Page as any)();
+    const resolvedPage = await (Page as unknown as () => Promise<React.ReactElement>)();
     render(resolvedPage);
 
     const registerButton = screen.getByRole("button", {
@@ -45,7 +46,7 @@ describe("Landing Page Integration", () => {
   });
 
   it("renders footer copyright with current year", async () => {
-    const resolvedPage = await (Page as any)();
+    const resolvedPage = await (Page as unknown as () => Promise<React.ReactElement>)();
     render(resolvedPage);
 
     const currentYear = new Date().getFullYear();

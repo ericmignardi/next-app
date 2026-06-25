@@ -85,3 +85,16 @@ jest.mock('@clerk/nextjs/server', () => {
     auth: jest.fn().mockResolvedValue({ userId: null }),
   };
 });
+
+// ---------------------------------------------------------------------------
+// Global mock: next/image
+// ---------------------------------------------------------------------------
+jest.mock('next/image', () => {
+  return {
+    __esModule: true,
+    default: ({ fill, priority, sizes, ...props }: Record<string, unknown>) => {
+      // eslint-disable-next-line @next/next/no-img-element
+      return React.createElement('img', { ...props });
+    },
+  };
+});

@@ -3,7 +3,6 @@
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 import { mux } from "@/lib/mux";
-import { type VideoModel as Video } from "@/generated/prisma/models";
 import { VideoFormValues } from "@/types/video";
 import { revalidatePath } from "next/cache";
 

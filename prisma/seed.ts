@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from "@/generated/prisma/client";
+import { PrismaClient } from "@/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 import "dotenv/config";
@@ -9,7 +9,8 @@ const pool = new Pool({
 
 const adapter = new PrismaPg(pool);
 
-const prisma = new PrismaClient({
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _prisma = new PrismaClient({
   adapter,
 });
 

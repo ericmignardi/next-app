@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Play } from "lucide-react";
+import Image from "next/image";
 
 interface VideoCardProps {
   id: string;
@@ -28,12 +29,12 @@ export function VideoCard({
       className="group block space-y-3.5 shrink-0 w-[280px] sm:w-[320px]"
     >
       <div className="relative aspect-video rounded-xl bg-slate-950 border border-white/[0.04] overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.8)] group-hover:border-white/10 group-hover:-translate-y-0.5">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={thumbnailUrl}
           alt={title}
           className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-[1.03] group-hover:opacity-90"
-          loading="lazy"
+          fill
+          sizes="(max-width: 640px) 280px, 320px"
         />
         {/* Hover State overlay mirroring standard streaming app interactions */}
         <div className="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[1px]">

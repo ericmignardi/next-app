@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
-import { Film, Shield, Trophy, LayoutGrid, ArrowLeft, Heart, Compass } from "lucide-react";
+import { Shield, Trophy, LayoutGrid, ArrowLeft, Compass } from "lucide-react";
 
 export const unstable_instant = false; // Exempt layout from validation to allow cookies/auth access
 

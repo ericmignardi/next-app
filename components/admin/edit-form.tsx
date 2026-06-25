@@ -12,14 +12,21 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-interface HighlightItem {
-  id: string;
-  timestamp: string;
-  label: string;
-}
-
 interface EditFormProps {
-  video: any; // We can use direct types or loose type matching the video from page
+  video: {
+    id: string;
+    title: string;
+    description?: string | null;
+    sport: string;
+    year: string;
+    team: string;
+    gameType: string;
+    jerseyNumber?: number | null;
+    highlights?: {
+      timestamp: string;
+      label: string;
+    }[] | null;
+  };
   onSuccess: () => void;
 }
 
@@ -36,7 +43,7 @@ export function EditForm({ video, onSuccess }: EditFormProps) {
       team: video.team,
       gameType: video.gameType,
       jerseyNumber: video.jerseyNumber ?? undefined,
-      highlights: (video.highlights ?? []).map((h: any) => ({
+      highlights: (video.highlights ?? []).map((h) => ({
         timestamp: h.timestamp,
         label: h.label,
       })),
