@@ -85,8 +85,8 @@ export default function SignIn() {
     try {
       const result = await signIn.sso({
         strategy,
-        redirectUrl: "/sso-callback",
-        redirectCallbackUrl: "/sign-in",
+        redirectCallbackUrl: "/sso-callback",
+        redirectUrl: "/dashboard",
       });
       if (result.error) {
         setError(result.error.message);

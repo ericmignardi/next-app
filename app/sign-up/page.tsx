@@ -139,8 +139,8 @@ export default function SignUp() {
     try {
       const result = await signIn.sso({
         strategy,
-        redirectUrl: "/sso-callback",
-        redirectCallbackUrl: "/sign-up",
+        redirectCallbackUrl: "/sso-callback",
+        redirectUrl: "/dashboard",
       });
       if (result.error) {
         setError(result.error.message);
